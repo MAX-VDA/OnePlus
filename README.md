@@ -1,3 +1,4 @@
+# Activer la 5G sur les smartphones OnePlus et modifier / ajouter les CA-Combos
 # Liens importants
 *Nécessite Windows* 
 
