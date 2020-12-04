@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!-- Post Policy for US location
+$Header: //commercial/MPSS.HE.1.0.c1/Main/modem_proc/mmcp/policyman/configurations/Carrier/GenericUSA/post.xml#3 $
+-->
+<policy name        = "generic"
+        changelist  = "$Change: 18149650 $"
+        policy_ver  = "1101.2.7"
+>
+
+  <initial>
+
+    <mcc_list name="post:us_mccs" ns="global"> 310 311 312 313 314 315 316 330 </mcc_list>
+
+    <mcc_list name="post:china_mccs" ns="global"> 460 </mcc_list>
+
+    <plmn_list name="post:cmcc_imsi" ns="global"> 460-00 460-02 460-04 460-07 460-08 </plmn_list>
+	
+    <plmn_list name="post:test_imsi" ns="global"> 001-01 001-12 460-99 </plmn_list>
+
+    <rf_band_list ns="global" name="post:fcc_compliant_bands">
+      <gw_bands  base="current" />
+      <lte_bands base="current">
+        <exclude> 6 37 </exclude>
+      </lte_bands>
+      <tds_bands base="current" />
+    </rf_band_list>
+
+    <rf_band_list ns="global" name="post:default_bands">
+      <gw_bands  base="current" />
+      <lte_bands base="current" />
+      <tds_bands base="current" />
+    </rf_band_list>
+
+    <define_fullrat_config is_post="true">
+      <rf_bands list="post:default_bands" />
+    </define_fullrat_config>
+
+  </initial>
+
+  <lte_feature name="NONDDS_APS">
+    <all_of>
+      <imsi_plmn_in list="post:cmcc_imsi" />
+      <imsi_plmn_in subs="other" list="post:cmcc_imsi" />
+      <serving_mcc_in subs="all" list="post:china_mccs" />
+    </all_of>
+  </lte_feature>
+
+  <!--one card is test_imsi set all band, other continue -->
+  <if> 
+    <any_of>
+      <imsi_plmn_in list="post:test_imsi" /> 
+      <imsi_plmn_in subs="other" list="post:test_imsi" /> 
+    </any_of>
+    <then>
+     <rf_bands base="hardware" />
+     <stop />  
+    </then>
+    <else>
+          <continue />
+    </else>
+  </if>
+
+  <if>
+    <any_of>
+      <not> <phone_operating_mode> ONLINE </phone_operating_mode> </not>
+      <not> <have_location /> </not>
+      <boolean_test name="pm:mcc_hysteresis_timer_running" />
+    </any_of>
+    <then> 
+      <stop />
+    </then>
+  </if>
+
+  <svc_mode> FULL </svc_mode>
+
+  <if>
+    <location_mcc_in list="post:us_mccs" />
+    <then>
+      <rf_bands list="post:fcc_compliant_bands" />
+    </then>
+    <else>
+      <rf_bands list="post:default_bands" />
+    </else>
+  </if>
+
+</policy>
