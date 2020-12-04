@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!-- 7+7 mode Device configuration file for open Market DSDS with L+L support
+$Header: //commercial/MPSS.HI.2.0.1.c5/Main/modem_proc/mmcp/policyman/configurations/DevConfig/DS/device_config.xml#1 $
+-->
+<policy name        = "Dual SIM Device Config"
+        changelist  = "$Change: 25804982 $"
+        policy_ver  = "2036.1.14"
+>
+
+  <initial>
+
+    <device_configuration num_sims="2" max_active_voice="1" max_active_data="2">
+      <config primary="C H G W L T 5G" secondary="G W L T 5G" />
+      <config primary="G W L T 5G" secondary="C H G W L T 5G" />
+      <e911_config primary="C H G W L T 5G" secondary="G W L T 5G" />
+      <e911_config primary="G W L T 5G" secondary="C H G W L T 5G" />
+    </device_configuration>
+
+    <feature subs="this">  dualmmode </feature>
+    <feature subs="other"> dualmmode </feature>
+
+  </initial>
+
+</policy>

@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!-- Post Policy for NR
+$Header: //components/rel/mmcp.mpss/10.0/policyman/configurations/Carrier/Generic_NR5G/nr_msim_restriction.xml#1 $
+-->
+<policy name        = "5G MSIM Restriction bands"
+        changelist  = "$Change: 18922297 $"
+        policy_ver  = "1109.2.1"
+>
+
+  <initial>
+
+    <mcc_list name="post:china_mccs" ns="global"> 460 </mcc_list>
+
+    <rf_band_list ns="global" name="post:default_bands">
+      <gw_bands  base="current" />
+      <lte_bands base="current" />
+      <tds_bands base="current" />
+      <nr5g_sa_bands base="current" />
+      <nr5g_nsa_bands base="current" />
+    </rf_band_list>
+ 
+    <rf_band_list ns="global" name="post:nonDDS_restricted_bands">
+      <gw_bands  base="current" />
+      <tds_bands base="current" />
+      <lte_bands base="current">
+        <exclude>
+          41 42 45 46 47 48       
+        </exclude>
+      </lte_bands>
+      <nr5g_sa_bands base="current" />
+      <nr5g_nsa_bands base="current" />
+    </rf_band_list>
+    
+    <define_fullrat_config is_post="true">
+      <if>
+        <all_of>  
+          <subs_is_active subs="this" />
+          <subs_is_active subs="other" />            
+          <is_subs_dds subs="other" />
+          <rat_enabled subs="other" base="current" set="5G" />
+        </all_of>
+        <then>
+         <rf_bands list="post:nonDDS_restricted_bands" />
+         <limited_rats_bands list="post:nonDDS_restricted_bands" />
+        </then>
+        <else>
+         <rf_bands list="post:default_bands" />
+         <limited_rats_bands list="post:default_bands" />
+        </else>
+      </if>
+    </define_fullrat_config>
+    
+  </initial>
+
+  <if>
+    <any_of>
+      <not> <phone_operating_mode> ONLINE </phone_operating_mode> </not>
+    </any_of>
+    <then> 
+      <stop />
+    </then>
+  </if>
+
+  <if>
+    <all_of>  
+      <subs_is_active subs="this" />
+      <subs_is_active subs="other" />            
+      <is_subs_dds subs="other" />
+      <rat_enabled subs="other" base="current" set="5G" />
+    </all_of>
+    <then>
+      <rf_bands list="post:nonDDS_restricted_bands" />
+      <limited_rats_bands list="post:nonDDS_restricted_bands" />
+    </then>
+    <else>
+      <rf_bands list="post:default_bands" />
+      <limited_rats_bands list="post:default_bands" />
+    </else>
+  </if>
+
+</policy>

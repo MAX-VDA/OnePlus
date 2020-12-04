@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!-- Restrictions for CDMA test card test in lab 
+$Header: //components/rel/mmcp.mpss/8.0/policyman/configurations/Restrictions/china_dsdx/restrictions.xml#1 $
+-->
+<policy name        = "generic"
+        changelist  = "$Change: 9629899 $"
+        schema_ver  = "1"
+        policy_ver  = "2016.11.10"
+>
+
+  <initial>
+    <actions>
+
+      <plmn_list name ="1x_lab_imsi_plmn">
+        460-99  001-12
+      </plmn_list>
+
+      <boolean_define name="restrictions:is_1x" initial="false" />
+      
+    </actions>
+  </initial>
+ 
+  <!-- Rule# 1 -->
+  <!-- findout if subs has cdma test card  -->
+  <rule precond="IMSI">
+    <conditions>
+      <true/>
+    </conditions>
+    <actions>
+      <boolean_set name="restrictions:is_1x">
+        <all_of>
+          <imsi_plmn_in list="1x_lab_imsi_plmn" />
+        </all_of>
+      </boolean_set>
+      <continue />
+    </actions>
+  </rule>
+
+  <!-- Rule# 2 -->
+  <!-- restirct cdma test card only include C H  -->
+  <rule>
+    <conditions>
+      <boolean_test name="restrictions:is_1x" />
+    </conditions>
+    <actions>
+      <svc_mode> FULL </svc_mode>
+    <rat_capability base="none">
+    <include> C H </include>
+    </rat_capability>
+    <ue_mode> 1X_CSFB_PREF </ue_mode>
+    </actions>
+  </rule> 
+  
+</policy>
