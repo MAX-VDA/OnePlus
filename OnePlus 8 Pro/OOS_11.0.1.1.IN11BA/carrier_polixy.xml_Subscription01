@@ -19,14 +19,17 @@
       <plmn_list name = "china_cmcc_plmns"> 460-00 460-02 460-04 460-07 460-08 </plmn_list>
       <plmn_list name = "EU_FR_plmn"> 208-20 208-21 208-88 208-15 208-16 208-01 208-02 </plmn_list>
 
-      <define_fullrat_config>
-        <actions>
-          <rat_capability base="none" > <include> G W T L C H 5G </include> </rat_capability>
-          <rf_bands base="hardware" />
-          <svc_mode> FULL </svc_mode>
-          <freq_list list="default" />
-        </actions>
-      </define_fullrat_config>
+   <define_fullrat_config>
+     <actions>
+        <ue_mode> CSFB </ue_mode>
+        <rat_capability base="none">
+          <include> C H G W L 5G </include>
+        </rat_capability>
+        <rf_bands base="hardware"/>
+        <svc_mode> ALL </svc_mode>
+        <freq_list list="default" />
+	    </actions>
+   </define_fullrat_config>
 
       <rf_band_list name="EU_FR_bands">
         <gw_bands base="hardware" />
