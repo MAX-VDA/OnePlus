@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!-- Carrier Policy file for SRLTE in open market with GWL roaming (class C)
+$Header: //commercial/MPSS.AT.2.0.c4/Main/modem_proc/mmcp/policyman/configurations/Carrier/OpenMarket/7+5_mode/CT/1xSRLTE/openMarket/carrier_policy.xml#1 $
+-->
+<policy name        = "generic"
+        changelist  = "$Change: 12215027 $" 
+        enabled     = "true"
+        schema_ver  = "1"
+        policy_ver  = "2017.2.7"
+>
+
+  <initial>
+      <!-- ==BEGIN== add by oem, 20161028 -->
+      <mcc_list name="test_sim_mccs">001 </mcc_list>
+      <plmn_list name="test_sim_plmns"> 460-99 001-01 001-12</plmn_list>
+
+      <boolean_define name="pm:allow_tds_on_this_sub" initial="true" />
+
+      <define_fullrat_config>
+        <actions>
+          <ue_mode> 1X_CSFB_PREF </ue_mode>
+          <rat_capability base="none">
+            <include> C H G W L T 5G </include>
+          </rat_capability>
+          <rf_bands />
+          <svc_mode> ALL </svc_mode>
+          <scan_optimization tgpp="no_auto_camp_only" tgpp2="wrlf" />
+          <freq_list list="cpfl" />
+        </actions>
+      </define_fullrat_config>
+
+      <!-- Define the 1x_oos timer with a 1 minute interval -->
+      <define_timer name = "1x_oos" interval = "1" units = "min" id = "100" />
+
+      <!-- Define a HOME RF band list that include GW and LTE bands -->
+      <rf_band_list name="rf_bands_home">
+        <gw_bands base = "hardware" />
+        <lte_bands base = "hardware" />
+        <tds_bands base = "hardware" />
+      </rf_band_list>
+
+      <!-- Define initial RAT capability as CHLGWT -->
+      <rat_capability_if base="none" >
+        <include> C H L G W T 5G </include>
+      </rat_capability_if>
+
+      <!-- Define Intial UE mode as 1X_CSFB_PREF -->
+      <ue_mode_if> 1X_CSFB_PREF </ue_mode_if>
+
+      <!-- On first boot, include Home bands -->
+      <rf_bands_if list="rf_bands_home" />
+
+      <scan_optimization tgpp="no_auto_camp_only" tgpp2="wrlf" />
+      <freq_list_if list="cpfl" />
+
+      <feature single_sim="srlte"> dualmmode </feature>
+      
+  </initial>
+
+  <!-- RULE #1 -->
+  <!-- We wait if we don't have location or we are not ONLINE.
+  -->
+  <if>
+    <any_of>
+      <not> <phone_operating_mode> ONLINE </phone_operating_mode> </not>
+      <not> <have_location /> </not>
+    </any_of>
+    <then>
+      <stop />
+    </then>
+  </if>
+
+  <!--
+  ====================================================================
+    Rules where location info can be used. Rules to implement SRLTE
+  ====================================================================
+  -->
+
+  <!-- Set config based on location(China/Roam). -->
+  <select>
+  <!-- Add for factory test with test sim -->
+    <case>
+      <any_of>
+        <imsi_mcc_in list="test_sim_mccs" />
+        <imsi_plmn_in list="test_sim_plmns" />
+      </any_of>
+      <actions>
+        <rat_capability base="none">
+          <include> G W L C H T 5G </include>
+        </rat_capability>
+        <svc_mode> FULL </svc_mode>
+        <ue_mode> 1X_CSFB_PREF </ue_mode>
+        <rat_order> L C W T G H 5G </rat_order>
+        <rf_bands base="hardware" />
+        <scan_optimization tgpp="no_auto_camp_only" tgpp2="wrlf" />
+        <freq_list list="default" />
+      </actions>
+    </case>
+
+  </select>
+
+</policy>

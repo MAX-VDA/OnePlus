@@ -5,7 +5,7 @@ $Header:  $
 -->
 <policy name        = "LTE FEATURE RESTRICTION"
         changelist  = "$Change: 19373687 $"
-        policy_ver  = "1103.2.7"
+        policy_ver  = "1103.2.9"
 >
 
   <initial>
@@ -21,9 +21,6 @@ $Header:  $
     <plmn_list name="sprint_plmns">
       310-120 311-490 311-870 311-940
     </plmn_list>
-	
-    <plmn_list name="dss_plmns">
-      228-01 505-01 505-11 505-39 505-71 505-72 204-04
 
     <mcc_list name="post:china_mccs" ns="global"> 460 </mcc_list>
 
@@ -32,7 +29,7 @@ $Header:  $
     </plmn_list>
 
     <plmn_list name="dss_plmns" ns="global">
-      228-01 505-01 505-11 505-39 505-71 505-72 204-04 262-02 204-16 204-20 232-03 232-04 232-07 208-21 208-15 208-16 208-20 208-10 208-01 208-88 262-01 204-08 242-02 260-06 250-01 214-05 214-07 214-01 234-30 234-33 234-34 234-31 234-32 235-01 235-02 234-15 235-91 238-06 311-480
+      228-01 505-01 505-11 505-39 505-71 505-72 204-04 262-01 262-06 204-16 204-20 204-04 206-01 238-001 238-010 208-15 208-10
     </plmn_list>
 
   </initial>
@@ -56,6 +53,14 @@ $Header:  $
     <all_of>
       <not> <location_mcc_in subs="this" list="disable_6dlca_lic_mccs" /> </not>
       <not> <serving_plmn_in list="sprint_plmns"  /> </not>	  
+    </all_of>
+  </lte_feature>
+
+  <lte_feature name="NONDDS_APS">
+    <all_of>
+      <imsi_plmn_in list="post:cmcc_imsi" />
+      <imsi_plmn_in subs="other" list="post:cmcc_imsi" />
+      <serving_mcc_in subs="all" list="post:china_mccs" />
     </all_of>
   </lte_feature>
 
