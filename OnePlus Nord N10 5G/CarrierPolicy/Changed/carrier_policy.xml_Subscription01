@@ -56,6 +56,8 @@ $Header: //commercial/MPSS.AT.2.0.c4/Main/modem_proc/mmcp/policyman/configuratio
       <include> 0 2 6 7 19 27 37 39 </include> <!-- the 8 LTE Band: 1/3/7/8/20/28/38/40 -->
     </lte_bands>
     <tds_bands base="none" />
+    <nr5g_sa_bands base="hardware" />
+    <nr5g_nsa_bands base="hardware" />
    </rf_band_list>
 
     <rf_band_list name="EU_FR_bands">
@@ -68,8 +70,9 @@ $Header: //commercial/MPSS.AT.2.0.c4/Main/modem_proc/mmcp/policyman/configuratio
         <include> 77 </include>
       </nr5g_sa_bands>
       <nr5g_nsa_bands base="none">
-        <include> 77 </include>
+        <include> 77 28 78 </include>
       </nr5g_nsa_bands>
+      
     </rf_band_list>
 
     <rf_band_list name="china_hk_macao_bands">
@@ -132,7 +135,7 @@ $Header: //commercial/MPSS.AT.2.0.c4/Main/modem_proc/mmcp/policyman/configuratio
           </any_of>
          <then>
            <rat_capability base="none">
-            <include> G W L 5G</include>
+            <include> G W L 5G </include>
            </rat_capability>
            <rat_order> 5G L W G </rat_order>
 
@@ -157,11 +160,11 @@ $Header: //commercial/MPSS.AT.2.0.c4/Main/modem_proc/mmcp/policyman/configuratio
       </all_of>
       <actions>
         <rat_capability base="none">
-            <include> G W L </include>
+            <include> G W L 5G </include>
         </rat_capability>
         <rf_bands list="europe_noraml_bands" />
         <ue_mode> CSFB </ue_mode>
-        <rat_order> L W G </rat_order>
+        <rat_order> 5G L W G </rat_order>
         <ca_band_combos string="3A4A-1A4-mAll;3A4-1A4A-mAll;7A4A-1A4-mAll;7A4-1A4A-mAll;20A2A-1A4-mAll;20A2-1A4A-mAll;7A4A-3A4-mAll;7A4-3A4A-mAll;20A2A-3A4-mAll;20A2-3A4A-mAll;20A2A-7A4-mAll;20A2-7A4A-mAll;3C44A-mAll;7C44A-mAll;28A2A-1A4-mAll;28A2-1A4A-mAll;28A2A-7A2-mAll;28A2-7A4A-mAll;28A2A-3A4-mAll;28A2-3A4A-mAll;7A2A-3A2-1A4-mAll;7A2-3A2A-1A4-mAll;7A2-3A2-1A4A-mAll;7A2A-3A4-1A2-mAll;7A2-3A4A-1A2-mAll;7A2-3A4-1A2A-mAll;7A4A-3A2-1A2-mAll;7A4-3A2A-1A2-mAll;7A4-3A2-1A2A-mAll;20A2A-3A2-1A4-mAll;20A2-3A2A-1A4-mAll;20A2-3A2-1A4A-mAll;20A2A-3A4-1A2-mAll;20A2-3A4A-1A2-mAll;20A2-3A4-1A2A-mAll;20A2A-7A2-1A4-mAll;20A2-7A2A-1A4-mAll;20A2-7A2-1A4A-mAll;20A2A-7A4-1A2-mAll;20A2-7A4A-1A2-mAll;20A2-7A4-1A2A-mAll;20A2A-7A2-3A4-mAll;20A2-7A2A-3A4-mAll;20A2-7A2-3A4A-mAll;20A2A-7A4-3A2-mAll;20A2-7A4A-3A2-mAll;20A2-7A4-3A2A-mAll;7A2A-7A2-1A4-mAll;7A2-7A2-1A4A-mAll;7A4A-7A2-1A2-mAll;7A4-7A2A-1A2-mAll;7A4-7A2-1A2A-mAll;7A2A-7A2-3A4-mAll;7A2-7A2-3A4A-mAll;7A4A-7A2-3A2-mAll;7A4-7A2A-3A2-mAll;7A4-7A2-3A2A-mAll;28A2A-7A2-1A4-mAll;28A2-7A2A-1A4-mAll;28A2-7A2-1A4A-mAll;28A2A-7A4-1A2-mAll;28A2-7A4A-1A2-mAll;28A2-7A4-1A2A-mAll;28A2A-7A2-3A4-mAll;28A2-7A2A-3A4-mAll;28A2-7A2-3A4A-mAll;28A2A-7A4-3A2-mAll;28A2-7A4A-3A2-mAll;28A2-7A4-3A2A-mAll;3C44C-mAll;7C44C-mAll;" />
       </actions>
     </case>
@@ -174,11 +177,11 @@ $Header: //commercial/MPSS.AT.2.0.c4/Main/modem_proc/mmcp/policyman/configuratio
       </all_of>
       <actions>
         <rat_capability base="none">
-          <include> G W L </include>
+          <include> G W L 5G </include>
         </rat_capability>
         <rf_bands list="global_others_bands" />
         <ue_mode> CSFB </ue_mode> 
-        <rat_order> L W G </rat_order>
+        <rat_order> 5G L W G </rat_order>
       </actions>
     </case>
     

@@ -1,0 +1,647 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!-- [update policy_ver to 16.12.01][2020][vamshi.ashtami]CA combination update-->
+<!-- [update policy_ver to 16.12.02][2020/04/06][vamshi.ashtami][Updated carrier policy for DT_group]-->
+<!-- [update policy_ver to 16.12.03][2020/06/18][umesh.tailor] Add Tele 2 PLMN for case execution -->
+
+<policy name        = "generic"
+        changelist  = "$Change: 11335222 $"
+        schema_ver  = "1"
+        policy_ver  = "16.12.03"
+>
+
+  <initial>
+    <actions>
+      <!-- List of the MCCs in which SRLTE is allowed -->
+      <!-- 20170829 jaylin, add 310 for SRLTE -->
+      <mcc_list name="sxlte_mccs"> 330 455 310 311 312 313 314 315 316 </mcc_list>
+
+      <!-- ==BEGIN== add by oem, 20161028 -->
+      <mcc_list name="test_sim_mccs">001 </mcc_list>
+
+      <!-- 1 europe_mccs -->
+      <mcc_list name="europe_mccs"> 202 204 206 208 212 212 213 214 216 218 219 220 222 226 228 230 231 232 234 235 238 240 242 244 246 247 248 255 257 259 260 262 266 268 270 272 274 276 278 280 284 286 288 292 293 294 295 297 </mcc_list>
+      <!-- 4 russia_mccs -->
+      <mcc_list name="russia_mccs"> 250 </mcc_list>
+      <!-- 5/6/7/8 america_mccs -->
+      <mcc_list name="america_mccs"> 310 311 312 313 314 315 316 </mcc_list>
+      <!--9 canada_mccs -->
+      <mcc_list name="canada_mccs"> 302 </mcc_list>
+      <!-- 10 india_mccs -->
+      <mcc_list name="india_mccs"> 404 405 406 </mcc_list>
+      <!-- 11 china_hk_macao_mccs -->
+      <mcc_list name="china_hk_macao_mccs"> 460 454 455 </mcc_list>
+      <!-- 13 taiwan_mccs -->
+      <mcc_list name="taiwan_mccs"> 466 </mcc_list>
+      <!-- 14 japan_mccs -->
+      <mcc_list name="japan_mccs"> 440 441 </mcc_list>
+      <!-- 15 oceania_mccs -->
+      <mcc_list name="oceania_mccs"> 340 505 530 536 537 539 540 541 542 544 545 546 547 548 549 550 551 552 553 555 </mcc_list>
+      <!-- 16 korea_mccs -->
+      <mcc_list name="korea_mccs"> 450 </mcc_list>
+      <!-- 17 Brazil_mccs -->
+      <mcc_list name="brazil_mccs"> 724 </mcc_list>
+      <!-- 18 Argentina_mccs -->
+      <mcc_list name="argentina_mccs"> 722 </mcc_list>
+      <mcc_list name="5G_mccs"> 214 </mcc_list>
+   <!-- PLMN list -->
+      
+      <plmn_list name="test_sim_plmns"> 460-99 001-01 001-12</plmn_list>
+      <!-- 5 america_att_plmns -->
+      <plmn_list name = "america_att_plmns"> 310-30 310-70 310-90 310-150 310-170 310-280 310-380 310-410 310-560 310-680 310-980 311-180 </plmn_list>
+      <!-- 6 america_tmo_plmns -->
+      <plmn_list name = "america_tmo_plmns"> 310-26 310-31 310-160 310-200 310-210 310-220 310-230 310-240 310-250 310-260 310-270 310-310 310-490 310-660 310-800 </plmn_list>
+      <!-- 7 america_verizon_plmns -->
+      <plmn_list name = "america_verizon_plmns"> 310-004 310-005 311-012 311-480 </plmn_list>
+      <!-- 8 hk_h3g_plmns -->
+      <plmn_list name = "hk_h3g_plmns"> 454-03 454-04 454-05 454-14 </plmn_list>
+      <plmn_list name = "soft_bank_plmns">440-04 440-06 440-20 440-40 440-41 440-42 440-43 440-44 440-45 440-46 440-47 440-48 440-90 440-92 440-93 440-94 440-95 440-96 440-97 440-98 </plmn_list>
+
+<!-- [OPCR#000018][2018/01/02][liuweibin][optimize tata rat_order] -->
+      <plmn_list name = "india_tata_plmns"> 305-025 305-026 305-027 305-028 305-029 305-030 305-031 305-032 305-033 305-034 305-035 305-036 305-037 305-038 305-039 305-041 305-042 305-043 305-044 305-045 305-046 305-047 </plmn_list>
+<!-- End [OPCR#000018] -->
+<!-- 10 China plmns -->
+      <plmn_list name = "china_cmcc_plmns"> 460-00 460-02 460-04 460-07 460-08 </plmn_list>
+      <plmn_list name = "china_cucc_plmns"> 460-01 460-06 460-09 </plmn_list>
+      <plmn_list name = "china_ctcc_plmns"> 460-03 460-05 460-11 460-12 455-02 455-07 460-59 </plmn_list>
+      <plmn_list name = "EU_DT_plmns"> 232-03 262-01 219-01 230-01 202-01 216-30 204-16 204-20 204-02 260-02 231-02 </plmn_list>
+      <plmn_list name = "EU_IT_plmns"> 222-01 222-10 222-99 222-88</plmn_list>
+
+<!---[OPCR#000367][2019/12/17][vamshi.ashtami][EU 5G operator PLMN's][214-07 Telefonica Spain][272-02 272-05 H3G Ireland]  -->
+<!-- [OPN-234][2020/01/29][polagani.harish][Disable 5G for 3 Ireland i.e.. 272-02 272-05 removed from 5G plmns]  -->
+      <plmn_list name = "eu_5g_plmns"> 001-01 </plmn_list>
+<!-- End [OPN-234] -->
+<!-- End [OPCR#000367] -->
+
+      <define_fullrat_config>
+        <actions>
+          <rat_capability base="none" > <include> G W T L C H 5G</include> <!-- 20170608 liuweibin, open TDS for full rat --> </rat_capability>
+          <rf_bands base="hardware" />
+          <svc_mode> FULL </svc_mode>
+          <freq_list list="default" />
+        </actions>
+      </define_fullrat_config>
+
+      <!-- Default RF bands list --> 
+      <rf_band_list name="rf_bands_default">
+        <gw_bands  base="hardware" />
+        <lte_bands base="hardware" />
+        <tds_bands base="none" />
+        <nr5g_sa_bands base="hardware" />
+        <nr5g_nsa_bands base="hardware" />
+      </rf_band_list>
+
+      <!-- 1 europe_bands -->
+      <rf_band_list name="europe_bands">
+        <gw_bands base="hardware" />
+        <lte_bands base="none"> <include> 0 2 6 7 19 27 31 37 39 </include> <!-- the LTE Band: 1/3/7/8/20/28/32/38/40 --> </lte_bands>
+        <tds_bands base="none" />
+        <nr5g_sa_bands base="hardware" />
+        <nr5g_nsa_bands base="hardware" />
+      </rf_band_list>
+
+<!---[OPCR#000367][2019/12/17][vamshi.ashtami][EU 5G operator PLMN's] -->
+
+      <!-- 3 europe_bands_nr -->
+       <rf_band_list name="europe_bands_nr">
+        <gw_bands base="hardware" />
+        <lte_bands base="none"> <include> 0 2 6 7 19 27 31 37 39 </include> <!-- the LTE Band: 1/3/7/8/20/28/32/38/40 --> </lte_bands>
+        <tds_bands base="none" />
+        <nr5g_sa_bands base="none"> <include> 77 </include> </nr5g_sa_bands>
+        <nr5g_nsa_bands base="none"> <include> 77 </include> </nr5g_nsa_bands>
+      </rf_band_list>  
+<!-- End [OPCR#000367] -->
+
+      <!-- 4 russia_bands -->
+      <rf_band_list name="russia_bands">
+        <gw_bands base="hardware" />
+        <lte_bands base="none"> <include> 0 2 6 19 37 </include> <!-- the LTE Band: 1/3/7/20/38 --> </lte_bands>
+        <tds_bands base="none" />
+      </rf_band_list>
+      <!-- 5 america_att_bands -->
+      <rf_band_list name="america_att_bands">
+        <gw_bands base="hardware" />
+        <lte_bands base="none"> <include> 1 3 4 11 16 28 29 65 45 47</include> <!-- the 10 LTE Band: 2/4/5/12/17/29/30/66/46/48--> </lte_bands>
+        <tds_bands base="none" />
+      </rf_band_list>
+      <!-- 6 america_tmo_bands -->
+      <rf_band_list name="america_tmo_bands">
+        <gw_bands base="hardware" />
+        <lte_bands base="none"> <include> 1 3 4 11 16 45 47 65 70 </include> <!-- the 9 LTE Band: 2/4/5/12/17/46/48/66/71 --> </lte_bands>
+        <tds_bands base="none" />
+      </rf_band_list>
+      <!-- 7 america_verizon_bands -->
+      <rf_band_list name="america_verizon_bands">
+        <gw_bands base="hardware" />
+        <lte_bands base="none"> <include> 1 3 4 12 45 47 65 </include> <!-- the 7 LTE Band: 2/4/5/13/46/48/66 --> </lte_bands>
+        <tds_bands base="none" />
+      </rf_band_list>
+      <!-- 8 america_others_bands -->
+      <rf_band_list name="america_others_bands">
+        <gw_bands base="hardware" />
+        <lte_bands base="none"> <include> 1 3 4 6 11 12 16 24 25 40 45 65 </include> <!-- the 12 LTE Band: 2/4/5/7/12/13/17/25/26/41/46/66 --> </lte_bands>
+        <tds_bands base="none" />
+      </rf_band_list>
+      <!-- 9 canada_bands -->
+      <rf_band_list name="canada_bands">
+        <gw_bands base="hardware" />
+        <lte_bands base="none"> <include> 1 3 4 6 11 12 16 28 29 45 65 </include> <!-- the 11 LTE Band: 2/4/5/7/12/13/17/29/30/46/66 --> </lte_bands>
+        <tds_bands base="none" />
+      </rf_band_list>
+      <!-- 10 india_bands -->
+      <rf_band_list name="india_bands">
+        <gw_bands base="hardware" />
+        <lte_bands base="none"> <include> 0 2 4 7 11 39 40 </include> <!-- the LTE Band: 1/3/5/8/12/40/41--> </lte_bands>
+        <tds_bands base="none" />
+      </rf_band_list>
+      <!-- 11 china_hk_macao_bands -->
+      <rf_band_list name="china_hk_macao_bands">
+        <gw_bands base="hardware" />
+        <lte_bands base="none"> <include> 0 2 4 6 7 25 33 37 38 39 40 </include> <!-- the 11 LTE Band: 1/3/5/7/8/26/34/38/39/40/41--> </lte_bands>
+        <tds_bands base="hardware" /> <!-- 20170608 liuweibin, open tds_bands for China cmcc -->
+      </rf_band_list>
+      <!-- 13 hk_h3g_bands -->
+      <rf_band_list name="hk_h3g_bands">
+        <gw_bands base="hardware" />
+        <lte_bands base="none"> <include> 0 2 6 7 37 39 40 </include> <!-- the 7 LTE Band: 1/3/7/8/38/40/41--> </lte_bands> 
+        <tds_bands base="none" />
+      </rf_band_list>
+      <!-- 13 cn_cmcc_bands -->
+      <rf_band_list name="cn_cmcc_bands">
+        <gw_bands base="hardware" />
+        <lte_bands base="none"> <include> 0 2 7 38 39 40 45 </include> <!-- the 7 LTE Band: 1/3/8/39/40/41/46--> </lte_bands> 
+        <tds_bands base="none" />
+      </rf_band_list>
+      <!-- 13 cn_cucc_bands -->
+      <rf_band_list name="cn_cucc_bands">
+        <gw_bands base="hardware" />
+        <lte_bands base="none"> <include> 0 2 7 39 40 45 </include> <!-- the 6 LTE Band: 1/3/8/40/41/46--> </lte_bands> 
+        <tds_bands base="none" />
+      </rf_band_list>
+      <!-- 13 cn_ctcc_bands -->
+      <rf_band_list name="cn_ctcc_bands">
+        <gw_bands base="hardware" />
+        <lte_bands base="none"> <include> 0 2 4 7 25 38 39 40 45 </include> <!-- the 9 LTE Band: 1/3/5/8/26/39/40/41/46--> </lte_bands> 
+        <tds_bands base="none" />
+      </rf_band_list>
+
+     <!-- 13 taiwan_bands -->
+      <rf_band_list name="taiwan_bands">
+        <gw_bands base="hardware" />
+        <lte_bands base="none"> <include> 0 2 6 7 27 37 40 45 </include> <!-- the 8 LTE Band: 1/3/7/8/28/38/41/46 --> </lte_bands> 
+        <tds_bands base="none" />
+      </rf_band_list>
+      <!-- 14-1 japan_sb_bands -->
+      <rf_band_list name="japan_sb_bands">
+        <gw_bands base="hardware" />
+        <lte_bands base="none"> <include> 0 2 7 27 40 41 </include> <!-- the 6 LTE Band: 1/3/8/28/41/42 --> </lte_bands> 
+        <tds_bands base="none" />
+      </rf_band_list>
+      <!-- 14-2 japan_others_bands -->
+      <rf_band_list name="japan_others_bands">
+        <gw_bands base="hardware" />
+        <lte_bands base="none"> <include> 0 2 7 17 18 25 27 40 41 </include> <!-- the 9 LTE Band: 1/3/8/18/19/26/28/41/42 --> </lte_bands> 
+        <tds_bands base="none" />
+      </rf_band_list>
+      <!-- 15 oceania_bands -->
+      <rf_band_list name="oceania_bands">
+        <gw_bands base="hardware" />
+        <lte_bands base="none"> <include> 0 2 4 6 7 27 39 </include> <!-- the 7 LTE Band: 1/3/5/7/8/28/40 --> </lte_bands>
+        <tds_bands base="none" />
+      </rf_band_list>
+      <!-- 16 korea_bands -->
+      <rf_band_list name="korea_bands">
+        <gw_bands base="hardware" />
+        <lte_bands base="none"> <include> 0 2 4 6 7 39 </include> <!-- the 6 LTE Band: 1/3/5/7/8/40 --> </lte_bands>
+        <tds_bands base="none" />
+      </rf_band_list>
+      <!-- 17 brazil_bands -->
+      <rf_band_list name="brazil_bands">
+        <gw_bands base="hardware" />
+        <lte_bands base="none"> <include> 0 2 6 27 </include> <!--  LTE Band: 1/3/7/28 --> </lte_bands>
+        <tds_bands base="none" />
+      </rf_band_list>
+      <!-- 18 argentina_bands -->
+      <rf_band_list name="argentina_bands">
+        <gw_bands base="hardware" />
+        <lte_bands base="none"> <include> 3 6 27 </include> <!-- LTE Band: 4/7/28 --> </lte_bands>
+        <tds_bands base="none" />
+      </rf_band_list>
+        <!-- 19 EU_IT _bands -->
+      <rf_band_list name="EU_IT_bands">
+        <gw_bands base="hardware" />
+        <lte_bands base="none"> <include> 0 2 6 19 27 31 37 </include> <!-- the 7 LTE Band: 1/3/7/20/28/32/38 --> </lte_bands>
+        <tds_bands base="none" />
+      </rf_band_list>
+       <!-- 20 EU_DT _bands -->
+      <rf_band_list name="EU_DT_bands">
+        <gw_bands base="hardware" />
+        <lte_bands base="none"> <include> 0 2 6 7 19 27 31 37 </include> <!-- the 9 LTE Band: 1/3/7/8/20/28/32/38 --> </lte_bands>
+        <tds_bands base="none" />
+      </rf_band_list>
+      <!--  global_others_bands -->
+      <rf_band_list name="global_others_bands">
+        <gw_bands base="hardware" />
+        <lte_bands base="none"> <include> 0 1 2 3 4 6 7 11 16 19 27 37 39 40 </include> <!-- the LTE Band: 1/2/3/4/5/7/8/12/17/20/28/38/40/41 --> </lte_bands>
+        <tds_bands base="none" />
+      </rf_band_list>
+
+      <rat_capability base="none" > <include> G W T L C H 5G</include> <!-- 20170608 liuweibin, open TDS for full rat --> </rat_capability>
+      <rf_bands_if list="rf_bands_default" />
+
+      <ue_mode_if> 1X_CSFB_PREF </ue_mode_if>
+      <freq_list_if list="default" />
+      <feature single_sim="srlte"> dualmmode </feature>
+      
+    </actions>
+  </initial>
+
+  <!-- RULE #1 -->
+  <!-- We wait if we don't have location or we are not ONLINE.
+  -->
+  <if precond="none">
+    <any_of>
+      <not> <have_location /> </not>
+      <not> <phone_operating_mode> ONLINE </phone_operating_mode> </not>
+    </any_of>
+    <then>
+      <stop />
+    </then>
+  </if>
+  
+  <!-- RULE #2 -->
+  <!-- Continue setting the capabilities.
+  -->
+  <svc_mode> FULL </svc_mode>
+  <rat_order> L W T G C H </rat_order> <!-- 20170608 liuweibin, open TDS for full rat -->
+  <rat_capability base="none"> <include> G W L T C H 5G</include> <!-- 20170608 liuweibin, open TDS for full rat --> </rat_capability>
+  <ue_mode> CSFB </ue_mode>
+  
+
+  <!-- RULE #3 -->
+  <!-- Set capability based on location.
+  -->
+  <select>
+
+  <!-- sxlte rule -->
+    <case>
+      <all_of>
+        <location_mcc_in list="america_mccs" />
+        <not><imsi_mcc_in list="test_sim_mccs" /></not>
+        <not><imsi_plmn_in list="test_sim_plmns" /></not>
+      </all_of>
+      <actions>
+        <rat_capability base="none"> <include> G W L 5G</include> </rat_capability> <!-- [OPCR#000112][20180830][Sean]  set default rat to GWL -->
+        <ue_mode> CSFB </ue_mode>
+        <rat_order> L W G </rat_order>
+        <freq_list list="default" />
+            <if>
+              <cond> <serving_plmn_in list = "america_att_plmns" /> </cond>
+              <then>
+                <rf_bands list="america_att_bands" />
+                <!-- [2019/11/04][jerry][Update CA band config sequence] NA_AT&T --> 
+                <!-- [2019/12/02][chris][Update CA band config sequence] NA_AT&T --> 
+                <ca_band_combos string="2A4A-2A4-m1;4A4-2A4A-m7;4A4A-2A4-m7;5A2-2A4A-m3;5A2A-2A4-m3;12A2A-2A4-m7;12A2-2A4A-m7;12A2A-2A4A-m7;29A2A-2A4-m7;29A2-2A4A-m7;30A2A-2A4-m1;30A2-2A4A-m1;66A4-2A4A-m7;66A4A-2A4-m7;4A4A-4A4-m3;5A2-4A4A-m3;5A2A-4A4-m3;12A2A-4A4-m3F;12A2-4A4A-m3F;12A2A-4A4A-m3F;29A2A-4A4-m7;29A2-4A4A-m7;30A2A-4A4-m1;30A2-4A4A-m1;30A2A-5A2-m1;30A2-5A2A-m1;66A4-5A2A-m1;66A4A-5A2-m1;30A2A-12A2-m1;30A2-12A2A-m1;66A4A-12A2-m3F;66A4-12A2A-m3F;66A4A-12A2A-m3F;30A2A-29A2-m1;30A2-29A2A-m1;46A2A-2A4-m1;46A2-2A4A-m1;46A2A-4A4-m1;46A2-4A4A-m1;66A4A-46A2-m1;66A4-46A2A-m1;12A2A-2A4-2A4-m1;12A2-2A4A-2A4-m1;12A2A-2A4A-2A4-m1;5A2-4A4-2A4A-m1;5A2-4A4A-2A4-m1;5A2A-4A4-2A4-m1;12A2A-4A4-2A4-m1;12A2-4A4A-2A4-m1;12A2-4A4-2A4A-m1;12A2A-4A4A-2A4-m1;12A2A-4A4-4A4-m1;12A2-4A4A-4A4-m1;12A2A-4A4A-4A4-m1;66A4A-12A2-2A4-m3;66A4-12A2A-2A4-m3;66A4-12A2-2A4A-m3;66A4-12A2A-2A4A-m3;66A4A-12A2A-2A4-m3;66A4-66A4-5A2A-m1;66A4A-66A4-5A2-m1;30A2A-5A2-2A4-m1;30A2-5A2A-2A4-m1;30A2-5A2-2A4A-m1;30A2A-12A2-2A4-m1;30A2-12A2A-2A4-m1;30A2-12A2-2A4A-m1;30A2-12A2A-2A4A-m1;30A2A-29A2-2A4-m1;30A2-29A2A-2A4-m1;30A2-29A2-2A4A-m1;30A2A-5A2-4A4-m1;30A2-5A2A-4A4-m1;30A2-5A2-4A4A-m1;30A2A-12A2-4A4-m1;30A2-12A2A-4A4-m1;30A2-12A2-4A4A-m1;30A2-12A2A-4A4A-m1;30A2A-29A2-4A4-m1;30A2-29A2A-4A4-m1;30A2-29A2-4A4A-m1;66A4A-30A2-5A2-m1;66A4-30A2A-5A2-m1;66A4-30A2-5A2A-m1;66A4A-30A2-12A2-m1;66A4-30A2A-12A2-m1;66A4-30A2-12A2A-m1;66A4A-30A2-12A2A-m1;46C22A-2A4-m1;46C22-2A4A-m1;46C22A-4A4-m1;46C22-4A4A-m1;66A4A-46C22-m1;66A4-46C22A-m1;66A4A-30A2-m1;66A4-30A2A-m1;" />
+              </then>
+              <else>
+                <if>
+                  <cond> <serving_plmn_in list = "america_tmo_plmns" /> </cond>
+                  <then>
+                    <rf_bands list="america_tmo_bands" />
+                    <!-- [2019/11/04][jerry][Update CA band config sequence] NA_TMO -->
+                    <ca_band_combos string="2A4A-2A4-0;4A4A-2A4-m7;4A4-2A4A-m7;5A2A-2A4-m3;5A2-2A4A-m3;12A2A-2A4A-m7;12A2A-2A4-m7;12A2-2A4A-m7;48A4-2A4A-0;48A4A-2A4-0;66A4A-2A4-m7;66A4-2A4A-m7;71A2A-2A4-m3;71A2-2A4A-m3;4A4A-4A4-m3;5A2A-4A4-m3;5A2-4A4A-m3;12A2A-4A4A-m3F;12A2A-4A4-m3F;12A2-4A4A-m3F;71A2A-4A4-0;71A2-4A4A-0;66A4A-12A2A-m3F;66A4A-12A2-m3F;66A4-12A2A-m3F;48A4A-48A4-0;66A4A-48A4-0;66A4-48A4A-0;66A4A-66A4-0;71A2A-66A4-0;71A2-66A4A-0;2C44A-0;48C44C-0;66B44B-0;48C44A-0;66B44A-0;66C44A-0;46A2-2A4A-0;46A2-4A4A-0;66A4A-46A2-0;48A4A-5A2-0;48A4-5A2A-0;4A4A-2A4-2A4-0;4A4-2A4A-2A4-0;12A2A-2A4A-2A4-0;12A2A-2A4-2A4-0;12A2-2A4A-2A4-0;66A4A-2A4-2A4-0;66A4-2A4A-2A4-0;71A2A-2A4-2A4-0;71A2-2A4A-2A4-0;4A4A-4A4-2A2-0;4A4-4A4-2A2A-0;4A4A-4A2-2A4-0;4A4-4A2A-2A4-0;4A4-4A2-2A4A-0;5A2A-4A4-2A4-0;5A2-4A4A-2A4-0;5A2-4A4-2A4A-0;12A2A-4A4-2A4-0;12A2-4A4A-2A4-0;12A2-4A4-2A4A-0;12A2A-4A4-2A4A-0;71A2A-4A4-2A4-0;71A2-4A4A-2A4-0;71A2-4A4-2A4A-0;66A4A-12A2-2A4-m3;66A4-12A2A-2A4-m3;66A4-12A2-2A4A-m3;66A4-12A2A-2A4A-m3;48C44-2A4A-0;48C44A-2A4-0;48A4-48A4-2A4A-0;48A4A-48A4-2A4-0;66A4A-48A4-2A4-0;66A4-48A4-2A4A-0;66A4-48A4A-2A4-0;66A4A-66A4-2A4-0;66A4-66A4-2A4A-0;71A2A-66A4-2A4-0;71A2-66A4A-2A4-0;71A2-66A4-2A4A-0;12A2A-4A4-4A4-0;12A2-4A4A-4A4-0;12A2A-4A4A-4A4-0;71A2A-4A4-4A4-0;71A2-4A4A-4A4-0;66A4A-66A4-12A2-0;66A4-66A4-12A2A-0;66A4A-66A4-12A2A-0;66C44A-2A4-0;66C44-2A4A-0;66C44C-2A4-0;66C44A-12A2-0;66C44-12A2A-0;66C44C-12A2-0;66A4A-2C44-0;66A4-2C44A-0;48D444A-0;48C44A-48A4-0;48C44-48A4A-0;48C44C-48A4-0;66A4A-48A4-48A4-0;66A4-48A4A-48A4-0;66A4A-48C44-0;66A4-48C44A-0;66C44A-66A4-0;66C44-66A4A-0;66C44C-66A4-0;71A2A-66C44-0;71A2-66C44A-0;71A2-66C44C-0;71A2A-66A4-66A4-0;71A2-66A4A-66A4-0;46C22-2A4A-0;46C22-4A4A-0;66A4A-46C22-0;46A2-46A2-4A4A-0;46A2-46A2-2A4A-0;66A4A-46A2-2A4-0;66A4-46A2-2A4A-0;66A4A-46A2-46A2-0;71A2A-66C44-2A4-0;71A2-66C44A-2A4-0;71A2-66C44-2A4A-0;71A2-66C44C-2A4-0;71A2A-66A4-66A4-2A4-0;71A2-66A4A-66A4-2A4-0;71A2-66A4-66A4-2A4A-0;71A2A-66A4-2A4-2A4-0;71A2-66A4A-2A4-2A4-0;71A2-66A4-2A4A-2A4-0;48E4444A-0;66A4A-48D222-0;66A4-48D222A-0;46C22-2A4A-2A4-0;46D222-2A4A-0;46D222-4A4A-0;66A4A-46D222-0;66A4A-46A2-46A2-2A4-0;66A4-46A2-46A2-2A4A-0;46C22-46A2-4A4A-0;46C22-46A2-2A4A-0;66A4A-46C22-46A2-0;66A4A-46C22-2A4-0;66A4-46C22-2A4A-0;66C44A-2A4-2A4-0;66C44-2A4A-2A4-0;66C44C-2A4-2A4-0;66C44A-12A2-2A4-0;66C44-12A2A-2A4-0;66C44-12A2-2A4A-0;66C44C-12A2-2A4-0;66C44-12A2A-2A4A-0;66A4A-66A2-2C44-0;66A4-66A2A-2C44-0;66A4-66A2-2C44A-0;66A4A-66A4-12A2-2A4-0;66A4-66A4-12A2A-2A4-0;66A4-66A4-12A2-2A4A-0;66A4-66A4-12A2A-2A4A-0;66A4A-66A4-2A4-2A2-0;66A4-66A4-2A4A-2A2-0;66A4-66A4-2A4-2A2A-0;66A4A-66A2-2A4-2A4-0;66A4-66A2A-2A4-2A4-0;66A4-66A2-2A4A-2A4-0;66A2A-12A2-2A4-2A4-0;66A2-12A2A-2A4-2A4-0;66A2-12A2-2A4A-2A4-0;66A2-12A2A-2A4A-2A4-0;66A2A-12A2A-2A4-2A4-0;66A4A-12A2-2A4-2A2-0;66A4-12A2A-2A4-2A2-0;66A4-12A2-2A4A-2A2-0;66A4-12A2-2A4-2A2A-0;66A4-12A2A-2A4-2A2A-0;66A4A-12A2A-2A4-2A2-0;46E2222-2A4A-0;46D222-2A4A-2A4-0;66A4A-46E2222-0;66A4A-48E4444-0;66A4-48E4444A-0;66A4A-46D222-46A2-0;46D222-46A2-4A4A-0;46D222-46A2-2A4A-0;66A4A-46C22-46A2-2A4-0;66A4-46C22-46A2-2A4A-0;66A4A-46D222-2A4-0;66A4-46D222-2A4A-0;66A4A-46E2222-2A4-0;66A4-46E2222-2A4A-0;66A4A-5A2-m1;66A4-5A2A-m1;66A4A-5A2-2A4-m1;66A4-5A2A-2A4-m1;66A4-5A2-2A4A-m1;12A2A-4A4-2A4-2A4-m1;12A2-4A4A-2A4-2A4-m1;12A2-4A4-2A4A-2A4-m1;" />
+                  </then>
+                  <else>
+                    <if>
+                      <!--[OPCR#000099][20180728][Sean]Modify condition from location_plmn_in to serving_plmn_in -->
+                      <cond> <serving_plmn_in list="america_verizon_plmns" /> </cond>
+                      <then>
+                        <!-- Modify ue_mode capability for Verizon CDMAless -->
+                        <rf_bands list="america_verizon_bands" />
+                        <!-- [2019/12/02][chris][Update CA band config sequence] NA_VzW --> 
+                        <!-- [2019/11/04][jerry][Update CA band config sequence] NA_VzW -->
+                        <!-- add CA by liuweibin 2018-7-5 -->
+                        <ca_band_combos string="2A4A-2A4-m1;4A4-2A4A-m7;4A4A-2A4-m7;5A2-2A4A-m3;5A2A-2A4-m3;13A2A-2A4A-m3;13A2-2A4A-m3;13A2A-2A4-m3;66A4-2A4A-m7;66A4A-2A4-m7;4A4A-4A4-m3;5A2-4A4A-m3;5A2A-4A4-m3;13A2A-4A4A-m3;13A2-4A4A-m3;13A2A-4A4-m3;66A4-5A2A-m1;66A4A-5A2-m1;66A4A-13A2A-m1;66A4-13A2A-m1;66A4A-13A2-m1;66A4A-66A4-m1;5B22A-m1;66B44A-m1;66B44B-m1;66C44A-m1;66C44C-m1;5A2A-2A4-2A4-m1;5A2-2A4A-2A4-m1;13A2A-2A4-2A4-m1;13A2-2A4A-2A4-m1;13A2A-2A4A-2A4-m1;66A4A-2A4-2A4-m1;66A4-2A4A-2A4-m1;46A2A-2A4-m1;46A2-2A4A-m1;46A2A-4A4-m1;46A2-4A4A-m1;66A4A-46A2-m1;66A4-46A2A-m1;5A2-4A4-2A4A-m1;5A2-4A4A-2A4-m1;5A2A-4A4-2A4-m1;13A2A-4A4-2A4-m1;13A2-4A4A-2A4-m1;13A2-4A4-2A4A-m1;13A2A-4A4-2A4A-m1;13A2A-4A4A-2A4-m1;66A4-5A2-2A4A-m1;66A4-5A2A-2A4-m1;66A4A-5A2-2A4-m1;66A4A-13A2-2A4-m1;66A4-13A2A-2A4-m1;66A4-13A2-2A4A-m1;66A4-13A2A-2A4A-m1;66A4A-13A2A-2A4-m1;66A4-66A4-2A4A-m1;66A4A-66A4-2A4-m1;5A2-4A4A-4A4-m1;5A2A-4A4-4A4-m1;13A2A-4A4-4A4-m1;13A2-4A4A-4A4-m1;13A2A-4A4A-4A4-m1;66C44-66A4A-m1;66C44A-66A4-m1;66C44C-66A4-m1;66A4-66A4-5A2A-m1;66A4A-66A4-5A2-m1;66A4-66A4-13A2A-m1;66A4A-66A4-13A2-m1;66A4A-66A4-13A2A-m1;66C44-5A2A-m1;66C44A-5A2-m1;66C44C-5A2-m1;46C22A-2A4-m1;46C22-2A4A-m1;46C22A-4A4-m1;46C22-4A4A-m1;66A4A-46C22-m1;66A4-46C22A-m1;66A4A-5A2-2A4-2A4-m1;66A4-5A2A-2A4-2A4-m1;66A4-5A2-2A4A-2A4-m1;66A4A-13A2-2A4-2A4-m1;66A4-13A2A-2A4-2A4-m1;66A4-13A2-2A4A-2A4-m1;66A4-13A2A-2A4A-2A4-m1;66A4A-13A2A-2A4-2A4-m1;66A4A-66A4-5A2-2A4-m1;66A4-66A4-5A2A-2A4-m1;66A4-66A4-5A2-2A4A-m1;66B44A-5A2-2A4-m1;66B44-5A2A-2A4-m1;66B44-5A2-2A4A-m1;66B44B-5A2-2A4-m1;66C44A-5A2-2A4-m1;66C44-5A2A-2A4-m1;66C44-5A2-2A4A-m1;66C44C-5A2-2A4-m1;66A4A-66A4-13A2-2A4-m1;66A4-66A4-13A2A-2A4-m1;66A4-66A4-13A2-2A4A-m1;66A4-66A4-13A2A-2A4A-m1;66A4A-66A4-13A2A-2A4-m1;66B44A-13A2-2A4-m1;66B44-13A2A-2A4-m1;66B44-13A2-2A4A-m1;66B44-13A2A-2A4A-m1;66C44A-13A2-2A4-m1;66C44-13A2A-2A4-m1;66C44-13A2-2A4A-m1;66C44-13A2A-2A4A-m1;66C44C-13A2-2A4-m1;66C44A-13A2-m1;66C44-13A2A-m1;" />
+                      </then>
+                      <else>
+                        <rat_capability base="none"> <include> G W L C H 5G</include> </rat_capability>
+                        <ue_mode> 1X_CSFB_PREF </ue_mode>
+                        <rat_order> L C H W G </rat_order>
+                        <rf_bands list="america_others_bands" />
+                        <!-- [2019/12/02][chris][Update CA band config sequence] US_OTHs -->
+                        <!-- [2019/11/04][jerry][Update CA band config sequence] US_OTHs -->
+                        <ca_band_combos string="4A4-2A4A-m7;4A4A-2A4-m7;5A2-2A4A-m3;5A2A-2A4-m3;66A4-2A4A-m7;66A4A-2A4-m7;4A4A-4A4-m3;5A2-4A4A-m3;5A2A-4A4-m3;66A4-5A2A-m1;66A4A-5A2-m1;26A2-25A4A-m7;26A2A-25A4-m7;41A4A-41A4-m3;66A4A-66A4-m1;41C44A-mF;41C44C-mF;66C44A-m1;66C44C-m1;46A2A-2A4-m1;46A2-2A4A-m1;46A2A-4A4-m1;46A2-4A4A-m1;66A4A-46A2-m1;66A4-46A2A-m1;5A2-4A4-2A4A-m1;5A2-4A4A-2A4-m1;5A2A-4A4-2A4-m1;66A4-5A2-2A4A-m1;66A4-5A2A-2A4-m1;66A4A-5A2-2A4-m1;66A4-66A4-2A4A-m1;66A4A-66A4-2A4-m1;5A2-4A4A-4A4-m1;5A2A-4A4-4A4-m1;66C44-66A4A-m1;66C44A-66A4-m1;66C44C-66A4-m1;66A4-66A4-5A2A-m1;66A4A-66A4-5A2-m1;66C44-5A2A-m1;66C44A-5A2-m1;66C44C-5A2-m1;41C44C-41A4-m1;41C44A-41A4-m1;41C44-41A4A-m1;41D444A-m1;46C22A-2A4-m1;46C22-2A4A-m1;46C22A-4A4-m1;46C22-4A4A-m1;66A4A-46C22-m1;66A4-46C22A-m1;" />
+                      </else>
+                    </if>
+                  </else>
+                </if>
+              </else>
+            </if>   
+      </actions>
+    </case>
+
+  <!-- roaming rule-->
+
+<!---[OPCR#000367][2019/12/17][vamshi.ashtami][EU 5G operator PLMN's] -->	
+
+    <case>
+      <all_of>
+        <location_mcc_in list="europe_mccs" />
+        <not><imsi_mcc_in list="test_sim_mccs" /></not>
+        <not><imsi_plmn_in list="test_sim_plmns" /></not>
+      </all_of>
+      <actions>
+          <rat_capability base="none"> <include> G W L 5G</include> </rat_capability>
+           <ue_mode> CSFB </ue_mode>
+           <rat_order> L W G </rat_order>
+           <if>
+             <cond> <serving_plmn_in list="EU_DT_plmns" /> </cond>
+             <then>
+               <!--europe_DT_bands-->
+              <rf_bands list="EU_DT_bands" />
+              <ca_band_combos string="3A4A-1A4-m3;3A4-1A4A-m3;7A4A-1A4-m3;7A4-1A4A-m3;8A2A-1A4-m7;8A2-1A4A-m7;8A2A-1A4A-m7;20A2A-1A4-m1;20A2-1A4A-m1;38A4A-1A2-m1;38A4-1A2A-m1;38A2A-1A4-m1;38A2A-1A4-m1;7A4A-3A4-m3;7A4-3A4A-m3;8A2A-3A4-mF;8A2-3A4A-mF;20A2A-3A4-m3;20A2-3A4A-m3;20A2A-3A4A-m3;32A2-3A2A-m1;38A4A-3A2-m1;38A4-3A2A-m1;38A2A-3A4-m1;38A4-3A4A-m1;20A2A-7A4-m7;20A2-7A4A-m7;20A2A-7A4A-m7;38A4A-8A2-m1;38A4-8A2A-m1;3C44A-m1;3C44C-m1;7C44A-m7;7C44C-m7;7A4A-7A4-mF;8A2A-7A4-m7;8A2-7A4A-m7;32A2-8A4A-m1;32A2-7A4A-m1;32A2-20A2A-m3;7A4A-3A4-1A2-m3;7A4-3A4A-1A2-m3;7A4-3A4-1A2A-m3;7A2A-3A4-1A4-m3;7A2-3A4A-1A4-m3;7A2-3A4-1A4A-m3;8A2A-3A4-1A4-mF;8A2-3A4A-1A4-mF;8A2-3A4-1A4A-mF;8A2A-3A4-1A4A-mF;8A2A-3A4A-1A4-mF;20A2A-3A4-1A4-m1;20A2-3A4A-1A4-m1;20A2-3A4-1A4A-m1;20A2A-3A4A-1A4-m1;20A2A-7A4-1A4-m7;20A2-7A4A-1A4-m7;20A2-7A4-1A4A-m7;7A4-3C44A-m1;7A4A-3C44-m1;7A4-3C44C-m1;8A2-3C44A-m1;8A2A-3C44-m1;8A2-3C44C-m1;8A2A-3C44A-m1;20A2A-3C44-m1;20A2-3C44A-m1;20A2A-3A2-3A2-m1;20A2-3A2A-3A2-m1;8A2A-7A4-3A4-m7;8A2-7A4A-3A4-m7;8A2-7A4-3A4A-m7;8A2A-7A4-3A4A-m7;20A2A-7A4-3A4-m3;20A2-7A4A-3A4-m3;20A2-7A4-3A4A-m3;20A2A-7A4-3A4A-m3;32A2-7A4A-3A2-m1;32A2-7A4-3A2A-m1;38A4A-8A2-3A2-m1;38A4-8A2A-3A2-m1;38A4-8A2-3A2A-m1;38A2A-8A2-3A4-m1;38A2-8A2A-3A4-m1;38A2-8A2-3A4A-m1;20A2A-7C44-m1;20A2-7C44A-m1;7C44A-3A4-m3;7C44-3A4A-m3;7C44C-3A4-m3;32A2-3C22A-m1;38A4A-3A4-1A4-m1;38A4-3A4A-1A4-m1;38A4-3A4-1A4A-m1;3C44A-1A4-m1;3C44-1A4A-m1;3C44C-1A4-m1;38A4A-8A2-1A2-m1;38A4-8A2A-1A2-m1;38A4-8A2-1A2A-m1;38A2A-8A2-1A4-m1;38A2-8A2A-1A4-m1;38A2-8A2-1A4A-m1;7A4A-7A4-1A4-m3;7A4-7A4-1A4A-m3;7A4-7A4A-1A4-m3;8A2A-7A4-1A4-m3;8A2-7A4A-1A4-m3;8A2-7A4-1A4A-m3;8A2A-7A4-1A4A-m3;7A4A-7A4-3A4-m3;7A4-7A4-3A4A-m3;7A4-7A4A-3A4-m3;32A2-20A2A-3A2-m1;32A2-20A2-3A2A-m1;32A2-20A2A-3A2A-m1;32A2-20A2A-7A4-m1;32A2-20A2-7A4A-m1;20A2A-7A4-3C22-m3;20A2-7A4A-3C22-m3;20A2-7A4-3C22A-m3;20A2A-7A2-3C44-m3;20A2-7A2A-3C44-m3;20A2-7A2-3C44A-m3;32A2-7A4A-3C22-m1;32A2-7A4-3C22A-m1;20A2A-7C44-3A2-m1;20A2-7C44A-3A2-m1;20A2-7C44-3A2A-m1;20A2A-7C22-3A4-m1;20A2-7C22A-3A4-m1;20A2-7C22-3A4A-m1;" />
+             </then>
+             <else>
+               <if>
+                 <cond> <serving_plmn_in list="EU_IT_plmns" /> </cond>
+                 <then>
+                 <!--europe_IT_bands-->
+                   <rf_bands list="EU_IT_bands" />
+                   <ca_band_combos string="3A4A-1A4-m3;3A4-1A4A-m3;7A4A-1A4-m3;7A4-1A4A-m3;20A2A-1A4-m1;20A2-1A4A-m1;28A2A-1A4-m3;28A2-1A4A-m3;32A2-1A4A-m1;7A4A-3A4-m3;7A4-3A4A-m3;20A2A-3A4-m3;20A2-3A4A-m3;20A2A-3A4A-m3;28A2A-3A4-m3;28A2-3A4A-m3;28A2A-3A4A-m3;32A2-3A2A-m1;20A2A-7A4-m7;20A2-7A4A-m7;20A2A-7A4A-m7;28A2A-7A4-m3;28A2-7A4A-m3;28A2A-7A4A-m3;32A2-7A4A-m1;32A2-20A2A-m3;3C44A-m1;3C44C-m1;7C44A-m7;7C44C-m7;7A2A-3A4-1A4-m3;7A2-3A4A-1A4-m3;7A2-3A4-1A4A-m3;7A4A-3A4-1A2-m3;7A4-3A4A-1A2-m3;7A4-3A4-1A2A-m3;20A2A-3A4-1A4-m1;20A2-3A4A-1A4-m1;20A2-3A4-1A4A-m1;20A2A-3A4A-1A4-m1;32A2-3A4A-1A4-m1;32A2-3A4-1A4A-m1;20A2A-7A4-1A4-m7;20A2-7A4A-1A4-m7;20A2-7A4-1A4A-m7;32A2-7A4A-1A4-m1;32A2-7A4-1A4A-m1;32A2-20A2A-1A4-m1;32A2-20A2-1A4A-m1;20A2A-7A4-3A4-m3;20A2-7A4A-3A4-m3;20A2-7A4-3A4A-m3;20A2A-7A4-3A4A-m3;38A2A-7A4-3A4-m1;38A2-7A4A-3A4-m1;38A2-7A4-3A4A-m1;32A2-7A4A-3A2-m1;32A2-7A4-3A2A-m1;32A2-20A2A-3A2-m1;32A2-20A2-3A2A-m1;32A2-20A2A-3A2A-m1;32A2-20A2A-7A4-m1;32A2-20A2-7A4A-m1;" />
+                 </then>
+                 <else>
+                   <if>
+                     <cond>
+                        <all_of>
+                         <serving_plmn_in list="eu_5g_plmns" />
+                         <imsi_mcc_in list="5G_mccs" />
+                         <imsi_plmn_in list="eu_5g_plmns" />
+                        </all_of>
+                     </cond>
+                     <then>
+                       <rat_capability base="none"> <include> G W L 5G </include> </rat_capability>
+                       <!--europe_nr_bands-->
+                       <rf_bands list="europe_bands_nr" />
+                       <!-- add NoUL CA Combos of UL CA by liuweibin 2018-8-30 -->
+                       <ca_band_combos string="3A4A-1A4-m3;3A4-1A4A-m3;7A4A-1A4-m3;7A4-1A4A-m3;20A2A-1A4-m1;20A2-1A4A-m1;32A2-1A4A-m1;7A4A-3A4-m3;7A4-3A4A-m3;20A2A-3A4A-m3;20A2A-3A4-m3;20A2-3A4A-m3;32A2-3A4A-m1;38A4A-3A2-m1;38A4-3A2A-m1;38A2A-3A4-m1;38A2-3A4A-m1;20A2A-7A4A-m7;20A2A-7A4-m7;20A2-7A4A-m7;32A2-7A4A-m1;32A2-20A2A-m3;38A4A-20A2-m1;38A4-20A2A-m1;3C44C-m1;3C44A-m1;7C44C-m1;7C44A-m1;38C22C-m1;38C22A-m1;3C44C-1A4-m1;3C44-1A4A-m1;3C44A-1A4-m1;7C44C-1A4-m3;7C44-1A4A-m3;7C44A-1A4-m3;7A4A-3A4-1A2-m3;7A4-3A4A-1A2-m3;7A4-3A4-1A2A-m3;7A2A-3A4-1A4-m3;7A2-3A4A-1A4-m3;7A2-3A4-1A4A-m3;20A2A-3A4A-1A4-m1;20A2-3A4-1A4A-m1;20A2A-3A4-1A4-m1;20A2-3A4A-1A4-m1;20A2-7A4-1A4A-m3;20A2A-7A4-1A4-m3;20A2-7A4A-1A4-m3;7C44C-3A4-m3;7C44-3A4A-m3;7C44A-3A4-m3;7A4A-3C44-m1;7A4-3C44C-m1;7A4-3C44A-m1;7A4A-3A4-3A4-m3;7A4-3A4A-3A4-m3;8A2A-3A4-3A4-m3;8A2-3A4A-3A4-m3;8A2A-7A4-3A4-m7;8A2-7A4A-3A4-m7;8A2-7A4-3A4A-m7;20A2A-7A4-3A4A-m3;20A2-7A4A-3A4-m3;20A2A-7A4-3A4-m3;20A2-7A4-3A4A-m3;38A2A-7A4-3A3-m1;38A2-7A4A-3A4-m1;38A2-7A4-3A4A-m1;38A4A-20A2-7A4-m1;38A4-20A2A-7A4-m1;38A4-20A2-7A4A-m1;7C44C-3C44-m3;7C44-3C44C-m3;7C44A-3C44-m3;7C44-3C44A-m3;7C44C-3A2-1A2-m3;7C44-3A2A-1A2-m3;7C44-3A2-1A2A-m3;7C44A-3A2-1A2-m3;7C22C-3A4-1A4-m3;7C22-3A4A-1A4-m3;7C22-3A4-1A4A-m3;7C22A-3A4-1A4-m3;7A4A-3C22-1A2-m3;7A4-3C22A-1A2-m3;7A4-3C22-1A2A-m3;7A2A-3C44-1A2-m3;7A2-3C44A-1A2-m3;7A2-3C44-1A2A-m3;7A2A-3C22-1A4-m3;7A2-3C22A-1A4-m3;7A2-3C22-1A4A-m3;" />
+                     </then>
+                     <else>
+                       <!--1 europe_bands-->
+                       <rf_bands list="europe_bands" />
+                       <!-- add NoUL CA Combos of UL CA by liuweibin 2018-8-30 -->
+                      <ca_band_combos string="3A4A-1A4-m3;3A4-1A4A-m3;7A4A-1A4-m3;7A4-1A4A-m3;20A2A-1A4-m1;20A2-1A4A-m1;32A2-1A4A-m1;7A4A-3A4-m3;7A4-3A4A-m3;20A2A-3A4A-m3;20A2A-3A4-m3;20A2-3A4A-m3;32A2-3A4A-m1;38A4A-3A2-m1;38A4-3A2A-m1;38A2A-3A4-m1;38A2-3A4A-m1;20A2A-7A4A-m7;20A2A-7A4-m7;20A2-7A4A-m7;32A2-7A4A-m1;32A2-20A2A-m3;38A4A-20A2-m1;38A4-20A2A-m1;3C44C-m1;3C44A-m1;7C44C-m1;7C44A-m1;38C22C-m1;38C22A-m1;3C44C-1A4-m1;3C44-1A4A-m1;3C44A-1A4-m1;7C44C-1A4-m3;7C44-1A4A-m3;7C44A-1A4-m3;7A4A-3A4-1A2-m3;7A4-3A4A-1A2-m3;7A4-3A4-1A2A-m3;7A2A-3A4-1A4-m3;7A2-3A4A-1A4-m3;7A2-3A4-1A4A-m3;20A2A-3A4A-1A4-m1;20A2-3A4-1A4A-m1;20A2A-3A4-1A4-m1;20A2-3A4A-1A4-m1;20A2-7A4-1A4A-m3;20A2A-7A4-1A4-m3;20A2-7A4A-1A4-m3;7C44C-3A4-m3;7C44-3A4A-m3;7C44A-3A4-m3;7A4A-3C44-m1;7A4-3C44C-m1;7A4-3C44A-m1;7A4A-3A4-3A4-m3;7A4-3A4A-3A4-m3;8A2A-3A4-3A4-m3;8A2-3A4A-3A4-m3;8A2A-7A4-3A4-m7;8A2-7A4A-3A4-m7;8A2-7A4-3A4A-m7;20A2A-7A4-3A4A-m3;20A2-7A4A-3A4-m3;20A2A-7A4-3A4-m3;20A2-7A4-3A4A-m3;38A2A-7A4-3A3-m1;38A2-7A4A-3A4-m1;38A2-7A4-3A4A-m1;38A4A-20A2-7A4-m1;38A4-20A2A-7A4-m1;38A4-20A2-7A4A-m1;7C44C-3C44-m3;7C44-3C44C-m3;7C44A-3C44-m3;7C44-3C44A-m3;7C44C-3A2-1A2-m3;7C44-3A2A-1A2-m3;7C44-3A2-1A2A-m3;7C44A-3A2-1A2-m3;7C22C-3A4-1A4-m3;7C22-3A4A-1A4-m3;7C22-3A4-1A4A-m3;7C22A-3A4-1A4-m3;7A4A-3C22-1A2-m3;7A4-3C22A-1A2-m3;7A4-3C22-1A2A-m3;7A2A-3C44-1A2-m3;7A2-3C44A-1A2-m3;7A2-3C44-1A2A-m3;7A2A-3C22-1A4-m3;7A2-3C22A-1A4-m3;7A2-3C22-1A4A-m3;" />
+                         </else>
+                    </if>
+                  </else>
+                </if>
+              </else>
+            </if>
+     </actions>	
+    </case>
+
+
+    <!--2 russia_bands-->
+    <case>
+      <all_of>
+        <location_mcc_in list="russia_mccs" />
+        <not><imsi_mcc_in list="test_sim_mccs" /></not>
+        <not><imsi_plmn_in list="test_sim_plmns" /></not>
+      </all_of>
+      <actions>
+        <rat_capability base="none"> <include> G W L 5G</include> </rat_capability>
+        <rf_bands list="russia_bands" />
+        <ue_mode> CSFB </ue_mode>
+        <rat_order> L W G </rat_order>
+        <!-- add NoUL CA Combos of UL CA by AllenLi 2018-12-21 -->
+        <ca_band_combos string="7A4A-3A4-m3;7A4-3A4A-m3;20A2A-3A4-m3;20A2-3A4A-m3;20A2A-3A4A-m3;38A4A-3A2-m1;38A4-3A2A-m1;38A2A-3A4-m1;38A2-3A4A-m1;20A2A-7A4-m7;20A2-7A4A-m7;20A2A-7A4A-m7;3C44A-m1;3C44C-m1;7C44A-m7;7C44C-m7;20A2A-7A4-3A4-m3;20A2-7A4A-3A4-m3;20A2-7A4-3A4A-m3;20A2A-7A4A-3A4-m3;20A2A-7A4-3A4A-m3;38A2A-7A4-3A4-m1;38A2-7A4A-3A4-m1;38A2-7A4-3A4A-m1;7A4A-3C44-m1;7A4-3C44A-m1;7A4-3C44C-m1;7C44A-3A4-m3;7C44-3A4A-m3;7C44C-3A4-m3;" />
+        </actions>
+    </case>
+
+    <!--6 canada_bands-->
+    <case>
+      <all_of>
+        <location_mcc_in list="canada_mccs" />
+        <not><imsi_mcc_in list="test_sim_mccs" /></not>
+        <not><imsi_plmn_in list="test_sim_plmns" /></not>
+      </all_of>
+      <actions>
+        <rat_capability base="none"> <include> G W L C H 5G</include> </rat_capability>
+        <rf_bands list="canada_bands" />
+        <ue_mode> 1X_CSFB_PREF </ue_mode>
+        <rat_order> L C H W G </rat_order>
+        <!-- [2019/11/04][jerry][Update CA band config sequence] NA_CA -->
+        <ca_band_combos string="4A4-2A4A-m7;4A4A-2A4-m7;29A2A-2A4-m7;29A2-2A4A-m7;4A4A-4A4-m3;12A2A-4A4-m3F;12A2-4A4A-m3F;12A2A-4A4A-m3F;29A2A-4A4-m7;29A2-4A4A-m7;7A2A-2A4-m1;7A2-2A4A-m1;7A4A-2A2-m1;7A4-2A2A-m1;7A2A-4A4-m3;7A2-4A4A-m3;7A4A-4A2-m3;7A4-4A2A-m3;7A4A-7A4-mF;12A2A-7A4-m1;12A2-7A4A-m1;46A2A-2A4-m1;46A2-2A4A-m1;46A2A-4A4-m1;46A2-4A4A-m1;66A4A-46A2-m1;66A4-46A2A-m1;7A4A-4A2-2A2-m1;7A4-4A2A-2A2-m1;7A4-4A2-2A2A-m1;7A2A-4A4-2A2-m1;7A2-4A4A-2A2-m1;7A2-4A4-2A2A-m1;7A2A-4A2-2A4-m1;7A2-4A2A-2A4-m1;7A2-4A2-2A4A-m1;29A2A-4A4-2A4-m1;29A2-4A4A-2A4-m1;29A2-4A4-2A4A-m1;7A2A-7A2-2A4-m1;7A2-7A2-2A4A-m1;7A4A-7A2-2A2-m1;7A4-7A2-2A2A-m1;7A2A-4A4-4A2-m3;7A2-4A4A-4A2-m3;7A4A-4A2-4A2-m3;7A4-4A2A-4A2-m3;7A2A-7A2-4A4-m1;7A2-7A2-4A4A-m1;7A4A-7A2-4A2-m1;7A4-7A2-4A2A-m1;12A2A-7A2-4A4-m3;12A2-7A2A-4A4-m3;12A2-7A2-4A4A-m3;12A2A-7A4-4A2-m3;12A2-7A4A-4A2-m3;12A2-7A4-4A2A-m3;46C22A-2A4-m1;46C22-2A4A-m1;46C22A-4A4-m1;46C22-4A4A-m1;66A4A-46C22-m1;66A4-46C22A-m1;" />
+      </actions>
+    </case>
+
+    <!--7 india_bands-->
+    <case>
+      <all_of>
+        <location_mcc_in list="india_mccs" />
+        <not><imsi_mcc_in list="test_sim_mccs" /></not>
+        <not><imsi_plmn_in list="test_sim_plmns" /></not>
+      </all_of>
+      <actions>
+        <rat_capability base="none"> <include> G W L 5G</include> </rat_capability>
+        <rf_bands list="india_bands" />
+        <ue_mode> CSFB </ue_mode>
+        <!-- add NoUL CA Combos of UL CA by liuweibin 2018-8-30 -->
+        <ca_band_combos string="3A4A-1A4-m3;3A4-1A4A-m3;8A2A-1A4-m7;8A2-1A4A-m7;40A2A-1A4-m1;40A2-1A4A-m1;3A4A-3A4-m7;8A2A-3A4-mF;8A2-3A4A-mF;40A2A-3A2-m3;40A2-3A2A-m3;5A2A-3A4-m1F;5A2-3A4A-m1F;41A2A-3A2-m3;41A2-3A2A-m3;5A2A-5A2-m3;40A2A-5A2-m3;40A2-5A2A-m3;40A2A-8A2-m3;40A2-8A2A-m3;40A2A-40A2-m3;3C44A-m1;3C44C-m1;40C22A-m3;40C22C-m3;41C44A-mF;41C44C-mF;40C22A-1A4-m1;40C22-1A4A-m1;40C22C-1A4-m1;40C22A-3A4-m1;40C22-3A4A-m1;8A2A-3A4-1A4-mF;8A2-3A4A-1A4-mF;8A2-3A4-1A4A-mF;40A2A-3A4-1A2-m1;40A2-3A4A-1A2-m1;40A2-3A4-1A2A-m1;40A2A-8A2-1A4-m1;40A2-8A2A-1A4-m1;40A2-8A2-1A4A-m1;40A2A-5A2-3A4-m3;40A2-5A2A-3A4-m3;40A2-5A2-3A4A-m3;40A2A-8A2-3A2-m1;40A2-8A2A-3A2-m1;40A2-8A2-3A2A-m1;40C22A-8A2-m1;40C22-8A2A-m1;" />
+<!-- [OPCR#000018][2018/01/02][liuweibin][optimize tata rat_order]-->
+        <if>
+          <cond> <serving_plmn_in list="india_tata_plmns" /> </cond>
+          <then> <rat_order> W G L </rat_order> </then>
+        </if>
+<!-- End [OPCR#000018]-->
+        </actions>
+    </case>
+
+    <!--8 china_hk_macao_bands-->
+    <case>
+      <all_of>
+        <location_mcc_in list="china_hk_macao_mccs" />
+        <not><imsi_mcc_in list="test_sim_mccs" /></not>
+        <not><imsi_plmn_in list="test_sim_plmns" /></not>
+      </all_of>
+      <actions>
+        <rat_capability base="none"> <include> G W L 5G</include> </rat_capability>
+        <rat_order> L W G </rat_order>
+        <ue_mode> CSFB </ue_mode>
+        <if>
+          <cond> <serving_plmn_in list="china_cmcc_plmns" /> </cond>
+          <then>        
+            <rat_capability base="none"> <include> G T L 5G</include> </rat_capability>
+            <rat_order> L T G </rat_order>
+            <rf_bands list="cn_cmcc_bands" />
+            <ca_band_combos string="39C22A-0;40C44C-m3;41C44C-mF;41A4A-39A2-0;41A4-39A2A-0;41A4A-3A4-m3;41A4-3A4A-m3;40A4A-40A4-m3;41A4A-41A4-m3;39A2A-8A2-0;39A2-8A2A-0;41A4A-8A2-m3;41A4-8A2A-m3;46A2-1A4A-m3;46A2-3A4A-m3;41A4A-39C22-0;41A4-39C22A-0;41A4-39C22C-0;41C44A-39A2-0;41C44-39A2A-0;41C44C-39A2-0;41C44A-3A4-0;41C44-3A4A-0;41C44A-8A2-0;41C44-8A2A-0;40D444A-m3;41D444A-0;46C22-1A4A-m3;46C22-3A4A-m3;" />
+          </then>
+           <else>
+             <if>
+               <cond> <serving_plmn_in list="china_cucc_plmns" /> </cond>
+               <then>
+                 <rf_bands list="cn_cucc_bands" />
+                 <ca_band_combos string="40C44C-m1;40C44A-m1;41C44C-mF;41C44A-mF;3A4A-1A4-m3;3A4-1A4A-m3;8A2A-1A4-m7;8A2-1A4A-m7;8A2A-3A4-mF;8A2-3A4A-mF;41A4A-3A4-m3;41A4-3A4A-m3;3C44C-m1;3C44A-m1;46A2A-1A4-m3;46A2-1A4A-m3;46A2A-3A4-m3;46A2-3A4A-m3;8A2A-3A4-1A4-mF;8A2-3A4A-1A4-mF;8A2-3A4-1A4A-mF;3C44C-1A2-m1;3C44A-1A2-m1;3C44-1A2A-m1;40D444A-m3;41D444A-m1;46C22A-1A4-m3;46C22-1A4A-m3;46C22A-3A4-m3;46C22-3A4A-m3;" />
+               </then>
+                  <else>
+                    <if>
+                      <cond> <serving_plmn_in list="china_ctcc_plmns" /> </cond>
+                      <then>
+                        <rf_bands list="cn_ctcc_bands" />
+                        <ca_band_combos string="40C44C-m3;41C44C-mF;3A4A-1A4-m3;3A4-1A4A-m3;5A2A-1A4-m3;5A2-1A4A-m3;26A2A-1A4-m3;26A2-1A4A-m3;5A2A-3A4-m1F;5A2-3A4A-m1F;5A2A-3A4A-m1F;26A2A-3A4-m3;26A2-3A4A-m3;46A2-1A4A-m3;46A2-3A4A-m3;5A2A-3A4-1A4-m3;5A2-3A4A-1A4-m3;5A2-3A4-1A4A-m3;5A2A-3A4A-1A4-m3;26A2A-3A4-1A4-m3;26A2-3A4A-1A4-m3;26A2-3A4-1A4A-m3;40D222A-m3;41D222A-0;46C22-1A4A-m3;46C22-3A4A-m3;" />
+                      </then>
+                      <else>
+                        <rf_bands list="china_hk_macao_bands" />
+                        <ca_band_combos string="7C44C-m7;7C44A-m7;40C44C-m7;40C44A-m7;3A4A-1A4-m3;3A4-1A4A-m3;7A4A-1A4-m3;7A4-1A4A-m3;8A2A-1A4-m7;8A2-1A4A-m7;7A4A-3A4-m3;7A4-3A4A-m3;8A2A-3A4-mF;8A2-3A4A-mF;40A4A-3A2-m3;40A4-3A2A-m3;40A2A-3A4-m3;40A2-3A4A-m3;40A2A-7A4-m1;40A2-7A4A-m1;46A2A-1A4-m3;46A2-1A4A-m3;46A2A-3A4-m3;46A2-3A4A-m3;46A2A-7A4-m3;46A2-7A4A-m3;7A4A-3A4-1A4-m3;7A4-3A4A-1A4-m3;7A4-3A4-1A4A-m3;8A2A-3A4-1A4-mF;8A2-3A4A-1A4-mF;8A2-3A4-1A4A-mF;7A4A-7A4-3A4-m3;7A4-7A4A-3A4-m3;7A4-7A4-3A4A-m3;7C44C-3A4-m3;7C44A-3A4-m3;7C44-3A4A-m3;40C44A-3A4-m1;40C44-3A4A-m1;40C44A-7A4-m1;40C44-7A4A-m1;40D444A-m3;46C22A-1A4-m3;46C22-1A4A-m3;46C22A-3A4-m3;46C22-3A4A-m3;46C22A-7A4-m3;46C22-7A4A-m3;" />
+                      </else>
+                    </if>
+                  </else>
+                </if>
+              </else>   
+        </if>
+      </actions>
+    </case>
+    
+<!--13 taiwan_bands-->
+    <case>
+      <all_of>
+        <location_mcc_in list="taiwan_mccs" />
+        <not><imsi_mcc_in list="test_sim_mccs" /></not>
+        <not><imsi_plmn_in list="test_sim_plmns" /></not>
+      </all_of>
+      <actions>
+        <rat_capability base="none"> <include> G W L 5G</include> </rat_capability>
+        <ue_mode> CSFB </ue_mode>
+        <rf_bands list="taiwan_bands" />
+        <rat_order> L W G </rat_order>
+        <!-- [2019/11/04][jerry][Update CA band config sequence] TW --> 
+        <ca_band_combos string="3A4A-1A4-m3;3A4-1A4A-m3;7A4A-1A4-m3;7A4-1A4A-m3;28A2A-1A4-m3;28A2-1A4A-m3;3A4A-3A4-m7;7A4A-3A4-m3;7A4-3A4A-m3;8A2A-3A4-mF;8A2-3A4A-mF;28A2A-3A4-m3;28A2-3A4A-m3;28A2A-3A4A-m3;38A4A-3A4-m1;38A4-3A4A-m1;7A4A-7A4-mF;8A2A-7A4-m7;8A2-7A4A-m7;28A2A-7A4-m3;28A2-7A4A-m3;28A2A-7A4A-m3;3C44A-m1;3C44C-m1;7C44A-m7;7C44C-m7;46A2A-1A4-m3;46A2-1A4A-m3;46A2A-3A4-m3;46A2-3A4A-m3;46A2A-7A4-m3;46A2-7A4A-m3;7A4A-3C44-m1;7A4-3C44A-m1;7A4-3C44C-m1;7C44A-3A4-m3;7C44-3A4A-m3;7C44C-3A4-m3;7A4A-3A4-1A4-m3;7A4-3A4A-1A4-m3;7A4-3A4-1A4A-m3;28A2A-3A4-1A4-m1;28A2-3A4A-1A4-m1;28A2-3A4-1A4A-m1;28A2A-3A4A-1A4-m1;7A4A-3A4-3A2-m3;7A4-3A4A-3A2-m3;7A4-3A4-3A2A-m3;7A2A-3A4-3A4-m3;7A2-3A4A-3A4-m3;7A2-3A4-3A4A-m3;8A2A-3A4-3A4-m3;8A2-3A4A-3A4-m3;8A2A-7A4-3A4-m7;8A2-7A4A-3A4-m7;8A2-7A4-3A4A-m7;28A2A-7A4-3A4-m1;28A2-7A4A-3A4-m1;28A2-7A4-3A4A-m1;28A2A-7A4A-3A4-m1;28A2A-7A4-3A4A-m1;38A4A-7A4-3A4-m1;38A4-7A4A-3A4-m1;38A4-7A4-3A4A-m1;46C22A-1A4-m3;46C22-1A4A-m3;46C22A-3A4-m3;46C22-3A4A-m3;46C22A-7A4-m3;46C22-7A4A-m3;" />
+      </actions>
+    </case>
+
+    <!--14 japan_bands-->
+    <case>
+      <all_of>
+        <location_mcc_in list="japan_mccs" />
+        <not><imsi_mcc_in list="test_sim_mccs" /></not>
+        <not><imsi_plmn_in list="test_sim_plmns" /></not>
+      </all_of>
+      <actions>
+        <!-- [2019/11/04][jerry][Update CA band config sequence] JP_SBM, JP_OTHs --> 
+        <rat_capability base="none"> <include> W L 5G</include> </rat_capability>
+        <ue_mode> CSFB </ue_mode>
+        <rat_order> L W </rat_order>
+        <if>
+        <cond> <serving_plmn_in list = "soft_bank_plmns" /> </cond>
+          <then>
+            <rf_bands list="japan_sb_bands" />
+            <ca_band_combos string="3A4A-1A4-m3;3A4-1A4A-m3;8A2A-1A4-m7;8A2-1A4A-m7;28A2A-1A4-m3;28A2-1A4A-m3;8A2A-3A4-mF;8A2-3A4A-mF;28A2A-3A4A-m3;28A2A-3A4-m3;28A2-3A4A-m3;41A4A-3A4-m3;41A4-3A4A-m3;42A2A-3A4-m1;42A2-3A4A-m1;41A4A-28A2-m3;41A4-28A2A-m3;42A2A-28A2-m1;42A2-28A2A-m1;42A2A-41A2-m1;42A2-41A2A-m1;41C44C-mF;41C44A-mF;42C22A-m3;8A2A-3A4-1A4-mF;8A2-3A4A-1A4-mF;8A2-3A4-1A4A-mF;28A2A-3A4A-1A4-m1;28A2A-3A4-1A4-m1;28A2-3A4A-1A4-m1;28A2-3A4-1A4A-m1;41A4A-28A2-3A4-m1;41A4-28A2A-3A4-m1;41A4-28A2-3A4A-m1;41A4-28A2A-3A4A-m1;42A2A-28A2-3A4-m1;42A2-28A2A-3A4-m1;42A2-28A2-3A4A-m1;42A2-28A2A-3A4A-m1;42A2A-41A4-3A4-m1;42A2-41A4A-3A4-m1;42A2-41A4-3A4A-m1;42A2A-41A4-28A2-m1;42A2-41A4A-28A2-m1;42A2-41A4-28A2A-m1;41C44A-3A4-m1;41C44-3A4A-m1;42C22A-3A4-m1;42C22-3A4A-m1;41C44A-28A2-m1;41C44-28A2A-m1;42C22A-28A2-m1;42C22-28A2A-m1;" />
+          </then>
+          <else>
+            <rf_bands list="japan_others_bands" />
+            <ca_band_combos string="3A4A-1A4-m3;3A4-1A4A-m3;18A2A-1A4-m3;18A2-1A4A-m3;19A2A-1A4-m1;19A2-1A4A-m1;28A2A-1A4-m3;28A2-1A4A-m3;41A4A-1A4-m3;41A4-1A4A-m3;19A2A-3A4-m1;19A2-3A4A-m1;28A2A-3A4A-m3;28A2A-3A4-m3;28A2-3A4A-m3;41A4A-3A4-m3;41A4-3A4A-m3;42A2A-3A4-m1;42A2-3A4A-m1;41A4A-28A2-m3;41A4-28A2A-m3;42A2A-28A2-m1;42A2-28A2A-m1;42A4A-41A2-m1;42A4-41A2A-m1;42A2A-41A4-m1;42A2-41A4A-m1;41C44C-mF;41C44A-mF;42C22A-m3;19A2A-3A4-1A4-m1;19A2-3A4A-1A4-m1;19A2-3A4-1A4A-m1;28A2A-3A4A-1A4-m1;28A2A-3A4-1A4-m1;28A2-3A4A-1A4-m1;28A2-3A4-1A4A-m1;41A4A-28A2-3A4-m1;41A4-28A2A-3A4-m1;41A4-28A2-3A4A-m1;41A4-28A2A-3A4A-m1;42A2A-28A2-3A4-m1;42A2-28A2A-3A4-m1;42A2-28A2-3A4A-m1;42A2-28A2A-3A4A-m1;42A2A-41A4-3A4-m1;42A2-41A4A-3A4-m1;42A2-41A4-3A4A-m1;42A2A-41A4-28A2-m1;42A2-41A4A-28A2-m1;42A2-41A4-28A2A-m1;41C44A-1A4-m1;41C44-1A4A-m1;41C44A-3A4-m1;41C44-3A4A-m1;42C22A-3A4-m1;42C22-3A4A-m1;41C44A-28A2-m1;41C44-28A2A-m1;42C22A-28A2-m1;42C22-28A2A-m1;" />
+          </else>
+        </if>
+      </actions>
+    </case>
+
+    <!--15 oceania_bands-->
+    <case>
+      <all_of>
+        <location_mcc_in list="oceania_mccs" />
+        <not><imsi_mcc_in list="test_sim_mccs" /></not>
+        <not><imsi_plmn_in list="test_sim_plmns" /></not>
+      </all_of>
+      <actions>
+        <rat_capability base="none"> <include> G W L 5G</include> </rat_capability>
+        <rf_bands list="oceania_bands" />
+        <ue_mode> CSFB </ue_mode>
+        <rat_order> L W G </rat_order>
+        <!-- [2019/11/04][jerry][Update CA band config sequence] AUS -->
+        <ca_band_combos string="3A4A-1A4-m3;3A4-1A4A-m3;7A4A-1A4-m3;7A4-1A4A-m3;28A2A-1A4-m3;28A2-1A4A-m3;5A2A-3A4-m1F;5A2-3A4A-m1F;7A4A-3A4-m3;7A4-3A4A-m3;28A2A-3A4-m3;28A2-3A4A-m3;28A2A-3A4A-m3;40A4A-3A4-m3;40A4-3A4A-m3;28A2A-7A4-m3;28A2-7A4A-m3;28A2A-7A4A-m3;3C44A-0;3C44C-0;7C44A-m7;7C44C-m7;40C44A-m3;40C44C-m3;5A2A-3A4-1A4-m3;5A2-3A4A-1A4-m3;5A2-3A4-1A4A-m3;7A4A-3A4-1A4-m3;7A4-3A4A-1A4-m3;7A4-3A4-1A4A-m3;28A2A-3A4-1A4-0;28A2-3A4A-1A4-0;28A2-3A4-1A4A-0;28A2A-3A4A-1A4-0;3C44A-1A4-0;3C44-1A4A-0;3C44C-1A4-0;7C44A-1A4-m3;7C44-1A4A-m3;7C44C-1A4-m3;7A4A-3C44-0;7A4-3C44A-0;7A4-3C44C-0;7C44A-3A4-m3;7C44-3A4A-m3;7C44C-3A4-m3;28A2A-7A4-3A4-0;28A2-7A4A-3A4-0;28A2-7A4-3A4A-0;28A2A-7A4-3A4A-0;28A2A-7A4A-3A4-0;40C44A-3A4-0;40C44-3A4A-0;40C44A-7A4-0;40C44-7A4A-0;28A2A-7C44-m3;28A2-7C44A-m3;28A2-7C44C-m3;" />
+      </actions>
+    </case>
+
+    <!--16 korea_bands-->
+    <case>
+      <all_of>
+        <location_mcc_in list="korea_mccs" />
+        <not><imsi_mcc_in list="test_sim_mccs" /></not>
+        <not><imsi_plmn_in list="test_sim_plmns" /></not>
+      </all_of>
+      <actions>
+        <rat_capability base="none"> <include> W L 5G</include> </rat_capability>
+        <rf_bands list="korea_bands" />
+        <ue_mode> CSFB </ue_mode>
+        <rat_order> L W </rat_order>
+        <!-- [2019/11/04][jerry][Update CA band config sequence] KR --> 
+        <ca_band_combos string="3A4A-1A4-m3;3A4-1A4A-m3;7A4A-1A4-m3;7A4-1A4A-m3;8A2A-1A4-m7;8A2-1A4A-m7;5A2A-3A4-m1F;5A2-3A4A-m1F;7A4A-3A4-m3;7A4-3A4A-m3;8A2A-3A4-mF;8A2-3A4A-mF;7A2A-5A2-m3;7A2-5A2A-m3;46A2A-1A4-m3;46A2-1A4A-m3;46A2A-3A4-m3;46A2-3A4A-m3;46A2A-7A4-m3;46A2-7A4A-m3;5A2A-3A4-1A4-m3;5A2-3A4A-1A4-m3;5A2-3A4-1A4A-m3;7A4A-3A4-1A4-m3;7A4-3A4A-1A4-m3;7A4-3A4-1A4A-m3;8A2A-3A4-1A4-mF;8A2-3A4A-1A4-mF;8A2-3A4-1A4A-mF;7A4A-5A2-3A4-m1;7A4-5A2A-3A4-m1;7A4-5A2-3A4A-m1;46C22A-1A4-m3;46C22-1A4A-m3;46C22A-3A4-m3;46C22-3A4A-m3;46C22A-7A4-m3;46C22-7A4A-m3;" />
+      </actions>
+    </case>
+
+<!-- Brazil_bands-->
+    <case>
+      <all_of>
+        <location_mcc_in list="brazil_mccs" />
+        <not><imsi_mcc_in list="test_sim_mccs" /></not>
+        <not><imsi_plmn_in list="test_sim_plmns" /></not>
+      </all_of>
+      <actions>
+        <rat_capability base="none"> <include> G W L 5G</include> </rat_capability>
+        <rf_bands list="brazil_bands" />
+        <ue_mode> CSFB </ue_mode>
+        <rat_order> L W G </rat_order>
+        <ca_band_combos string="3A2A-1A2-m3;3A2-1A2A-m3;7A4A-1A2-m3;7A4-1A2A-m3;7A4A-3A2-m3;7A4-3A2A-m3;28A2-3A2A-m3;28A2A-3A2-m3;28A2-7A4A-m3;28A2A-7A4-m3;7C44A-m7;7A4A-3A2-1A2-m3;7A4-3A2A-1A2-m3;7A4-3A2-1A2A-m3;28A2-7A4A-3A2-m1;28A2-7A4-3A2A-m1;28A2A-7A4-3A2-m1;" />
+        </actions>
+    </case>
+    
+
+<!-- Argentina_bands-->    
+    <case>
+      <all_of>
+        <location_mcc_in list="argentina_mccs" />
+        <not><imsi_mcc_in list="test_sim_mccs" /></not>
+        <not><imsi_plmn_in list="test_sim_plmns" /></not>
+      </all_of>
+      <actions>
+        <rat_capability base="none"> <include> G W L 5G</include> </rat_capability>
+        <rf_bands list="argentina_bands" />
+        <ue_mode> CSFB </ue_mode>
+        <rat_order> L W G </rat_order>
+        <ca_band_combos string="7A2A-4A4-m3;7A2-4A4A-m3;7A4A-4A2-m3;7A4-4A2A-m3;28A2-4A4A-m1;28A2A-4A4-m1;28A2-7A4A-m3;28A2A-7A4-m3;7C44A-m7;28A2-7A4A-3A4-m1;28A2-7A4-3A4A-m1;28A2A-7A4-3A4-m1;" />
+        </actions>
+    </case>
+
+    <!--15 global_others_bands-->
+    <case>
+      <all_of>
+        <not><imsi_mcc_in list="test_sim_mccs" /></not>
+        <not><imsi_plmn_in list="test_sim_plmns" /></not>
+      </all_of>
+      <actions>
+        <rat_capability base="none"> <include> G W L 5G</include> </rat_capability>
+        <rf_bands list="global_others_bands" />
+        <ue_mode> CSFB </ue_mode>
+        <rat_order> L W G </rat_order>
+        <!-- [2019/06/24][miki][Add CA combinations CA_1A-3A-8A/CA_40C/CA_40D in global_others mbn by rf request.] -->
+        <ca_band_combos string="3A4A-1A4-m3;3A4-1A4A-m3;7A4A-1A4-m3;7A4-1A4A-m3;20A2A-1A4-m1;20A2-1A4A-m1;28A2A-1A4-m3;28A2-1A4A-m3;2A2A-2A2-m1;4A2A-2A2-m7;4A2-2A2A-m7;5A2A-3A4-m1F;5A2-3A4A-m1F;7A4A-3A4-m3;7A4-3A4A-m3;8A2A-3A4-mF;8A2-3A4A-mF;20A2-3A4A-m3;20A2A-3A4-m3;28A2A-3A4-m3;28A2-3A4A-m3;38A4A-3A2-m1;38A4-3A2A-m1;38A2A-3A4-m1;38A2-3A4A-m1;40A2A-3A4-m3;40A2-3A4A-m3;4A2A-4A2-m3;28A2A-4A2-m1;28A2-4A2A-m1;40A2A-5A2-m3;40A2-5A2A-m3;8A2A-7A4-m7;8A2-7A4A-m7;20A2A-7A4-m7;20A2-7A4A-m7;28A2A-7A4-m3;28A2-7A4A-m3;40A2A-7A2-m1;40A2-7A2A-m1;2C22A-m1;3C44A-m1;7C44A-m1;38C44A-m1;40C22A-m1;41C44A-mF;5A2A-3A4-1A4-m3;5A2-3A4A-1A4-m3;5A2-3A4-1A4A-m3;7A4A-3A2-1A2-m3;7A4-3A2A-1A2-m3;7A4-3A2-1A2A-m3;7A2A-3A4-1A4-m3;7A2-3A4A-1A4-m3;7A2-3A4-1A4A-m3;7A4A-3A4-1A2-m3;7A4-3A4A-1A2-m3;7A4-3A4-1A2A-m3;8A2A-3A4-1A4-mF;8A2-3A4A-1A4-mF;8A2-3A4-1A4A-mF;20A2-3A4-1A4A-m1;20A2A-3A4-1A4-m1;20A2-3A4A-1A4-m1;28A2-3A4-1A4A-m1;28A2A-3A4-1A4-m1;28A2-3A4A-1A4-m1;20A2-7A4-1A4A-m7;20A2A-7A4-1A4-m7;20A2-7A4A-1A4-m7;7C44-3A4A-m3;7C44A-3A4-m3;7A4A-3C44-m1;7A4-3C44A-m1;20A2A-3C44-m1;20A2-3C44A-m1;40C22A-3A4-m1;40C22-3A4A-m1;7A4A-3A4-3A2-m3;7A4-3A4A-3A2-m3;7A4-3A4-3A2A-m3;7A2A-3A4-3A4-m3;7A2A-3A4A-3A4-m3;8A2A-3A4-3A4-m3;8A2-3A4A-3A4-m3;8A2A-7A4-3A4-m7;8A2-7A4A-3A4-m7;8A2-7A4-3A4A-m7;20A2A-7A4-3A4-m3;20A2-7A4A-3A4-m3;20A2-7A4-3A4A-m3;28A2A-7A4-3A4-m1;28A2-7A4A-3A4-m1;28A2-7A4-3A4A-m1;38A2A-7A4-3A4-m1;38A2-7A4A-3A4-m1;38A2-7A4-3A4A-m1;40C22A-7A4-m1;40C22-7A4A-m1;" />
+      </actions>
+    </case>
+
+  <!-- Add for factory test with test sim -->
+    <case>
+      <any_of>
+        <imsi_mcc_in list="test_sim_mccs" />
+        <imsi_plmn_in list="test_sim_plmns" />
+      </any_of>
+      <actions>
+        <rat_capability base="none"> <include> G W L C H T 5G</include> </rat_capability>
+        <svc_mode> FULL </svc_mode>
+        <rat_order> L C W T G H </rat_order>
+        <rf_bands base="hardware" />
+        <freq_list list="default" />
+      </actions>
+    </case>
+ 
+  </select>
+<!-- ==END== -->
+</policy>
