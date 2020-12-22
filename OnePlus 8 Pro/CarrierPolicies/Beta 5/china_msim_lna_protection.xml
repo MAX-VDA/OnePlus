@@ -1,0 +1,165 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!-- Post Policy for China location
+$Header: //components/rel/mmcp.mpss/10.0/policyman/configurations/Carrier/GenericChina/china_msim_lna_protection.xml#1 $
+-->
+<policy name        = "China MSIM LNA Protection"
+        changelist  = "$Change: 18922297 $"
+        policy_ver  = "1105.2.3"
+>
+
+  <initial>
+
+    <mcc_list name="post:china_mccs" ns="global"> 460 </mcc_list>
+
+    <plmn_list name="post:cmcc_plmn" ns="global"> 460-00 460-02 460-04 460-07 460-08 </plmn_list>
+    <plmn_list name="post:cu_plmn" ns="global"> 460-01 460-06 460-09 </plmn_list>
+    <plmn_list name="post:ct_plmn" ns="global"> 460-03 460-05 460-11 </plmn_list>
+
+    <boolean_define name="post:nDDS_msim_mode" ns="global" initial="true" />
+    <boolean_define name="post:card_is_cmcc_plus_other_china" ns="global" initial="true" />
+    <boolean_define name="post:service_is_cmcc_plus_other_china" ns="global" initial="true" />
+    <boolean_define name="post:service_is_ct_sub0" ns="global" initial="true" />
+    <boolean_define name="post:service_is_ct_sub1" ns="global" initial="true" />
+      
+    <rf_band_list ns="global" name="post:default_bands">
+      <gw_bands  base="current" />
+      <lte_bands base="current" />
+      <tds_bands base="current" />
+      <nr5g_sa_bands base="current" />
+      <nr5g_nsa_bands base="current" />
+    </rf_band_list>
+    
+    <rf_band_list ns="global" name="post:disable_B38_41_bands">
+      <gw_bands  base="current" />
+      <lte_bands base="current" >
+        <exclude> 37 40 </exclude>
+      </lte_bands>
+      <tds_bands base="current" />
+      <nr5g_sa_bands base="current" />
+      <nr5g_nsa_bands base="current" />
+    </rf_band_list>
+    
+    <define_fullrat_config is_post="true">
+      <rf_bands list="post:default_bands" />
+    </define_fullrat_config>
+
+  </initial>
+
+
+  <boolean_set name="post:nDDS_msim_mode">
+    <all_of>
+      <subs_is_active subs="this" />
+      <subs_is_active subs="other" />            
+      <is_subs_dds subs="other" />
+    </all_of>
+  </boolean_set>
+
+  <boolean_set name="post:card_is_cmcc_plus_other_china">
+    <any_of>
+      <all_of>
+        <imsi_plmn_in subs="0" list="post:cmcc_plmn" />
+        <any_of>
+          <imsi_plmn_in subs="1" list="post:cu_plmn" />
+          <imsi_plmn_in subs="1" list="post:ct_plmn" />
+        </any_of>
+      </all_of>
+
+      <all_of>
+        <imsi_plmn_in subs="1" list="post:cmcc_plmn" />
+        <any_of>
+          <imsi_plmn_in subs="0" list="post:cu_plmn" />
+          <imsi_plmn_in subs="0" list="post:ct_plmn" />
+        </any_of>
+      </all_of>
+    </any_of>
+  </boolean_set>
+
+  <if>
+    <any_of>
+      <not> <phone_operating_mode> ONLINE </phone_operating_mode> </not>
+      <not> <have_location /> </not>
+    </any_of>
+    <then> 
+      <stop />
+    </then>
+  </if>
+
+  <boolean_set name="post:service_is_ct_sub0">
+    <all_of>
+      <location_mcc_in list="post:china_mccs" />
+      <any_of>
+        <serving_rat_in subs="0"> C H </serving_rat_in>
+        <serving_plmn_in subs="0" list="post:ct_plmn" />
+      </any_of> 
+    </all_of>
+  </boolean_set>
+
+  <boolean_set name="post:service_is_ct_sub1">
+    <all_of>
+      <location_mcc_in list="post:china_mccs" />
+      <any_of>
+        <serving_rat_in subs="1"> C H </serving_rat_in>
+        <serving_plmn_in subs="1" list="post:ct_plmn" />
+      </any_of>
+    </all_of>
+  </boolean_set>
+  
+  <boolean_set name="post:service_is_cmcc_plus_other_china">
+    <any_of>
+      <all_of>
+        <serving_plmn_in subs="0" list="post:cmcc_plmn" /> 
+        <any_of>
+          <serving_plmn_in subs="1" list="post:cu_plmn" />
+          <boolean_test name="post:service_is_ct_sub1" />
+        </any_of>
+      </all_of>
+
+      <all_of>
+        <serving_plmn_in subs="1" list="post:cmcc_plmn" />
+        <any_of>
+          <serving_plmn_in subs="0" list="post:cu_plmn" />
+          <boolean_test name="post:service_is_ct_sub0" />
+        </any_of>
+      </all_of>
+    </any_of>
+  </boolean_set>
+
+
+  <select>
+
+    <!-- Card based, for china sim cards -->
+    <case>
+      <all_of>
+        <boolean_test name="post:nDDS_msim_mode" />
+        <boolean_test name="post:card_is_cmcc_plus_other_china" />      
+        <location_mcc_in list="post:china_mccs" />
+        <not> <imsi_plmn_in list="post:cmcc_plmn" /> </not>
+      </all_of>
+      <then>
+        <rf_bands list="post:disable_B38_41_bands" />
+      </then>
+    </case>
+
+    <!-- Service based, for non-china sim cards -->
+    <case>
+      <all_of>
+        <boolean_test name="post:nDDS_msim_mode" />
+        <boolean_test name="post:service_is_cmcc_plus_other_china" />          
+        <not> <serving_plmn_in list="post:cmcc_plmn" /> </not>
+      </all_of>
+      <then>
+        <rf_bands list="post:disable_B38_41_bands" />
+      </then>
+    </case>    
+
+    <case>
+      <true />
+      <then>
+        <rf_bands list="post:default_bands" />
+      </then>
+    </case>
+
+  </select>
+
+</policy>
