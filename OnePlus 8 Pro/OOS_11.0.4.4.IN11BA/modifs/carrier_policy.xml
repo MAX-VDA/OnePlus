@@ -21,7 +21,7 @@
 
       <define_fullrat_config>
         <actions>
-          <rat_capability base="none" > <include> G W T L C H</include> </rat_capability>
+          <rat_capability base="none" > <include> G W T L C H 5G </include> </rat_capability>
           <rf_bands base="hardware" />
           <svc_mode> FULL </svc_mode>
           <freq_list list="default" />
@@ -34,10 +34,10 @@
       </rf_band_list>
       <rf_band_list name="EU_others_bands">
         <gw_bands base="hardware" />
-        <lte_bands base="none"> <include> 0 2 6 7 19 27 31 37 39 45 </include> </lte_bands>
-        <tds_bands base="none" />
-        <nr5g_sa_bands base="none"/>
-        <nr5g_nsa_bands base="none" ><include> 2 27 77 </include> </nr5g_nsa_bands>
+        <lte_bands base="hardware"> <include> 0 2 6 7 19 27 31 37 39 45 </include> </lte_bands>
+        <tds_bands base="hardware" />
+        <nr5g_sa_bands base="hardware"/>
+        <nr5g_nsa_bands base="hardware" ><include> 2 27 77 </include> </nr5g_nsa_bands>
       </rf_band_list>
       <rf_band_list name="china_hk_macao_bands">
         <gw_bands base="hardware" />
