@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!-- Post Policy for US location
+$Header: //components/rel/mmcp.mpss/10.0/policyman/configurations/Carrier/GenericUSA/us_fcc_band_restrictions.xml#1 $
+-->
+<policy name        = "5G MSIM Restrictions"
+        changelist  = "$Change: 18922297 $"
+        policy_ver  = "1102.2.1"
+>
+
+  <initial>
+
+    <mcc_list name="post:china_mccs" ns="global"> 460 </mcc_list>
+
+    <plmn_list name="post:cmcc_imsi" ns="global"> 460-00 460-02 460-04 460-07 460-08 </plmn_list>
+
+    <rf_band_list ns="global" name="post:default_bands">
+      <gw_bands  base="current" />
+      <lte_bands base="current" />
+      <tds_bands base="current" />
+      <nr5g_sa_bands base="current" />
+      <nr5g_nsa_bands base="current" />
+    </rf_band_list>
+    
+    <rf_band_list ns="global" name="post:disable_NR_bands">
+      <gw_bands  base="current" />
+      <lte_bands base="current" />
+      <tds_bands base="current" />
+      <nr5g_sa_bands base="none" />
+      <nr5g_nsa_bands base="none" />
+    </rf_band_list>
+    
+    <define_fullrat_config is_post="true">
+      <rf_bands list="post:default_bands" />
+    </define_fullrat_config>
+
+  </initial>
+
+  <lte_feature name="NONDDS_APS">
+    <all_of>
+      <imsi_plmn_in list="post:cmcc_imsi" />
+      <imsi_plmn_in subs="other" list="post:cmcc_imsi" />
+      <serving_mcc_in subs="all" list="post:china_mccs" />
+    </all_of>
+  </lte_feature>
+
+  <if>
+    <any_of>
+      <not> <phone_operating_mode> ONLINE </phone_operating_mode> </not>
+      <not> <have_location /> </not>
+    </any_of>
+    <then> 
+      <stop />
+    </then>
+  </if>
+
+  <if>
+    <all_of>
+      <subs_is_active subs="this" />
+      <subs_is_active subs="other" />      
+      <not> <location_mcc_in list="post:china_mccs" /> </not>
+    </all_of>
+    <then>
+      <rf_bands list="post:disable_NR_bands" />
+    </then>
+    <else>
+      <rf_bands list="post:default_bands" />
+    </else>
+  </if>
+
+</policy>
