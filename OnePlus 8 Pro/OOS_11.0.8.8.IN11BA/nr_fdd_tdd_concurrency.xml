@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!-- Post Policy for NR FDD and TDD concurrency requirements
+$Header: //components/rel/mmcp.mpss/10.0/policyman/configurations/Carrier/Generic_NR5G/nr_fdd_tdd_concurrency.xml#1 $
+-->
+<policy name        = "5G FDD TDD Concurrency Bands"
+        changelist  = "$Change: $"
+        policy_ver  = "1107.2.1"
+>
+
+  <initial>
+
+    <rf_band_list ns="global" name="post:NR_FDD_TDD_bands">
+      <gw_bands  base="current" />
+      <lte_bands base="current" />
+      <tds_bands base="current" />
+      <nr5g_sa_bands base="current" >
+        <intersect_with mask="TDD" />
+      </nr5g_sa_bands>
+      <nr5g_nsa_bands base="current" >
+        <intersect_with mask="FDD TDD" />
+      </nr5g_nsa_bands>
+    </rf_band_list>
+
+  </initial>
+
+  <if>
+    <any_of>
+      <not> <phone_operating_mode> ONLINE </phone_operating_mode> </not>
+    </any_of>
+    <then> 
+      <stop />
+    </then>
+  </if>
+
+  <rf_bands list="post:NR_FDD_TDD_bands" />
+  <limited_rats_bands list="post:NR_FDD_TDD_bands" />
+
+</policy>
